@@ -8,7 +8,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import TitleBar from './components/TitleBar.vue';
 import HeaderView from './components/HeaderView.vue';
 import AboutView from './components/AboutView.vue';
@@ -18,14 +18,50 @@ const downBackground = ref<HTMLElement | null>(null);
 const up = ref(0.1);
 const down = ref(0.6);
 
+let animationId: number | null = null;
+
 const updateExposure = () => {
   if (!upBackground.value || !downBackground.value) return;
   upBackground.value.style.opacity = up.value.toString();
   downBackground.value.style.opacity = down.value.toString();
 };
 
+const lerp = (start: number, end: number, t: number) => {
+  return start + (end - start) * t;
+};
+
+const animate = () => {
+  const threshold = window.innerHeight * 0.8;
+  const scrollY = window.scrollY;
+
+  const t = Math.min(1, Math.max(0, scrollY / threshold));
+
+  up.value = lerp(0.1, 0.5, t);
+  down.value = lerp(0.6, 0.2, t);
+  updateExposure();
+
+  if (t < 1) {
+    animationId = requestAnimationFrame(animate);
+  }
+};
+
+const handleScroll = () => {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+  animate();
+};
+
 onMounted(() => {
   updateExposure();
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
 });
 </script>
 <style scoped>
