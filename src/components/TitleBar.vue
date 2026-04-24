@@ -2,11 +2,22 @@
   <div class="title-container" :style="{ opacity: visibleOpacity }">
     <div class="content">
       <div class="left">
-        <img class="avatar" src="@/assets/static/avatar.jpg" alt="avatar-title" />
-        <span style="color: white">Tiouo</span>
+        <img
+          class="avatar"
+          :style="{
+            opacity: visibleOpacity,
+            width: `${scale * 42}px`,
+            height: `${scale * 42}px`,
+          }"
+          src="@/assets/static/avatar.jpg"
+          alt="avatar-title" />
+        <span style="color: white; opacity: visibleOpacity">Tiouo</span>
       </div>
       <div class="right">
-        <button class="g-btn" @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')">
+        <button
+          :style="{ width: `${scale * 139}px` }"
+          class="g-btn"
+          @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')">
           <span style="position: relative; top: 1px">Contact</span>
           <div class="g-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -32,10 +43,15 @@ const windowObj = window;
 const visibleOpacity = computed(() => {
   return props.scrollRatio >= 1 ? 1 : 0;
 });
+
+const scale = computed(() => {
+  return props.scrollRatio >= 1 ? 1 : 0;
+});
 </script>
 
 <style scoped>
 .content {
+  display: flex;
   max-width: 1440px;
   align-items: center;
   justify-content: space-between;
@@ -52,8 +68,8 @@ const visibleOpacity = computed(() => {
   box-sizing: border-box;
   z-index: 100;
   background: transparent;
-  backdrop-filter: blur(2px) saturate(180%);
-  -webkit-backdrop-filter: blur(2px) saturate(180%);
+  backdrop-filter: blur(2px) saturate(90%);
+  -webkit-backdrop-filter: blur(2px) saturate(90%);
   mask-image: linear-gradient(
     to bottom,
     black 0%,
@@ -74,6 +90,7 @@ const visibleOpacity = computed(() => {
   padding: 10px 20px;
   border-radius: 999px;
   display: flex;
+  border: 0;
   align-items: center;
   font-weight: 600;
   color: black;
@@ -81,8 +98,7 @@ const visibleOpacity = computed(() => {
   font-size: 16px;
   background: rgba(255, 255, 255);
   cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
 }
 .g-btn-icon {
   margin-left: 10px;
@@ -99,6 +115,7 @@ const visibleOpacity = computed(() => {
   height: 42px;
   border-radius: 50%;
   margin-right: 12px;
+  transition: all 0.2s ease;
 }
 .left {
   display: flex;
@@ -110,5 +127,6 @@ const visibleOpacity = computed(() => {
 }
 span {
   line-height: 1;
+  transition: opacity 0.3s ease;
 }
 </style>

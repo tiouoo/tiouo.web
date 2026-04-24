@@ -37,7 +37,7 @@ const animate = () => {
 
   const t = Math.min(1, Math.max(0, scrollY / threshold));
 
-  up.value = lerp(0.1, 0.6, t);
+  up.value = lerp(0.1, 0.4, t);
   down.value = lerp(0.6, 0.2, t);
   scrollRatio.value = Math.min(1, Math.max(0, scrollY / (window.innerHeight * 0.55)));
   updateExposure();
