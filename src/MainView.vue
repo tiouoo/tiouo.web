@@ -2,7 +2,7 @@
   <div ref="upBackground" class="up-background"></div>
   <div ref="downBackground" class="down-background"></div>
   <div class="content">
-    <TitleBar />
+    <TitleBar :scrollRatio="scrollRatio" />
     <HeaderView />
     <AboutView />
   </div>
@@ -15,6 +15,7 @@ import AboutView from './components/AboutView.vue';
 
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);
+const scrollRatio = ref(0);
 const up = ref(0.1);
 const down = ref(0.6);
 
@@ -36,8 +37,9 @@ const animate = () => {
 
   const t = Math.min(1, Math.max(0, scrollY / threshold));
 
-  up.value = lerp(0.1, 0.5, t);
+  up.value = lerp(0.1, 0.6, t);
   down.value = lerp(0.6, 0.2, t);
+  scrollRatio.value = Math.min(1, Math.max(0, scrollY / (window.innerHeight * 0.55)));
   updateExposure();
 
   if (t < 1) {
