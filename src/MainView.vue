@@ -2,12 +2,14 @@
   <div ref="upBackground" class="up-background"></div>
   <div ref="downBackground" class="down-background"></div>
   <div class="content">
-    <TitleBar class="title-bar" />
+    <TitleBar />
+    <HeaderView />
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import TitleBar from './components/TitleBar.vue';
+import HeaderView from './components/HeaderView.vue';
 
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);
