@@ -11,6 +11,5 @@ import MainView from './MainView.vue';
 .root {
   width: 100%;
   height: 100%;
-  /* 移除背景设置，让body的格子背景能够显示 */
 }
 </style>
