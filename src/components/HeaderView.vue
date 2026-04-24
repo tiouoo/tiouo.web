@@ -52,8 +52,10 @@
               </svg>
             </div>
           </button>
-          <button @click="windowObj.open('https://github.com/tiouoo', '_blank')" class="btn">
-            <span>Github</span>
+          <button
+            @click="windowObj.open('https://status.tiouo.xyz/status/default', '_blank')"
+            class="btn">
+            <span>Sites</span>
             <div class="btn-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
                 <path

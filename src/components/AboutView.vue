@@ -2,45 +2,95 @@
   <div class="about-container">
     <div class="root">
       <h2 id="about">ABOUT ME</h2>
-      <p class="title-text"><del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer</p>
+      <p class="title-text">
+        <del>Junior High Graduate. </del>
+        <strong> Grade 10 Dreamer & Life Enthusiast 🍃</strong>
+      </p>
       <div class="content-body">
-        I enjoy making
+        <span>Currently navigating the exciting (and slightly chaotic) world of </span>
+        <span class="highlight">high school</span>.
+        <br />
+        I spend my days balancing
+        <a href="javascript:void(0)" class="link-tag">complex equations</a>
+        and the simple joy of a
+        <a href="javascript:void(0)" class="link-tag">golden sunset</a>.
+        <span> Just a curious soul trying to capture every vibrant moment of life.</span>
+      </div>
+      <div class="photo-gallery">
         <a
-          href="https://github.com/tiouoo"
+          v-for="(photo, index) in photos"
+          :key="index"
+          :href="photo.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="link-tag"
-          title="GitHub">
-          useful and fun projects
-          <span class="icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-            </svg>
-          </span>
-        </a>
-        <span> or just </span>
-        <a
-          href="https://status.tiouo.xyz/status/default"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-tag"
-          title="status">
-          some bugs
-          <span class="icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-              <path
-                d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
-            </svg>
-          </span>
+          class="gallery-item">
+          <img :src="photo.url" :alt="photo.title" class="gallery-img" />
+
+          <div class="overlay">
+            <p class="overlay-text">
+              <span v-if="photo.location" class="location-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2a9 9 0 0 1 9 9c0 3.074-1.676 5.59-3.442 7.395a20.4 20.4 0 0 1-2.876 2.416l-1.681 1.02a1.87 1.87 0 0 1-1.854 0l-1.681-1.02a20.6 20.6 0 0 1-3.093-2.566C4.676 16.589 3 14.074 3 11a9 9 0 0 1 9-9m0 2a7 7 0 0 0-7 7c0 2.322 1.272 4.36 2.871 5.996.65.665 1.4 1.32 2.222 1.91l.458.326.427.288.39.25.343.209.289.169.455-.269.367-.23.627-.417.458-.326a18 18 0 0 0 2.222-1.91C17.728 15.361 19 13.322 19 11a7 7 0 0 0-7-7m0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4a2 2 0 0 0 0-4"
+                    fill="currentColor" />
+                </svg>
+              </span>
+              {{ photo.location ? `${photo.title}, ${photo.location}` : photo.title }}
+            </p>
+          </div>
         </a>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const photos = [
+  {
+    title: 'Yichou Jinshi Archway',
+    location: 'Canton',
+    url: 'https://f.tiouo.xyz/picgo/20260425032037513.jpg',
+  },
+  {
+    title: 'Red Bay',
+    location: 'Shanwei',
+    url: 'https://f.tiouo.xyz/picgo/20260425030629520.jpg',
+  },
+  {
+    title: 'Kang Park',
+    location: 'Canton',
+    url: 'https://f.tiouo.xyz/picgo/20260425031501975.jpg',
+  },
+  {
+    title: 'Tianhe',
+    location: 'Canton',
+    url: 'https://f.tiouo.xyz/picgo/20260425033252306.jpg',
+  },
+  {
+    title: 'Zengcheng',
+    location: 'Canton',
+    url: 'https://f.tiouo.xyz/picgo/20260425032334489.png',
+  },
+  {
+    title: 'Zengcheng',
+    location: 'Canton',
+    url: 'https://f.tiouo.xyz/picgo/20260425032559487.jpg',
+  },
+  {
+    title: 'Pig',
+    url: 'https://f.tiouo.xyz/picgo/20260425033049464.jpg',
+  },
+  {
+    title: 'Lottus',
+    location: 'Yunnan',
+    url: 'https://f.tiouo.xyz/picgo/20260425030629521.jpg',
+  },
+  {
+    title: 'Chicken',
+    url: 'https://f.tiouo.xyz/picgo/20260425032758314.jpg',
+  },
+];
+</script>
 
 <style scoped>
 #about {
@@ -100,5 +150,88 @@
   width: 1em;
   height: 1em;
   fill: currentColor;
+}
+.photo-gallery {
+  margin-top: 2rem;
+  column-gap: 1rem;
+  columns: 2; /* 默认两列 */
+}
+
+@media (min-width: 768px) {
+  .photo-gallery {
+    columns: 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .photo-gallery {
+    columns: 4;
+  }
+}
+
+/* 卡片容器 */
+.gallery-item {
+  position: relative;
+  display: block;
+  margin-bottom: 1rem; /* 对应 space-y-4 */
+  overflow: hidden;
+  border-radius: 1rem;
+  break-inside: avoid;
+  cursor: zoom-in;
+  text-decoration: none;
+}
+
+/* 图片样式 */
+.gallery-img {
+  width: 100%;
+  height: 60%; /* 原代码中有 h-[60%] */
+  object-fit: cover;
+  display: block;
+  transition:
+    transform 0.6s ease,
+    opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.05);
+}
+
+/* 遮罩层 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+
+/* 文字样式 */
+.overlay-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* 图标微调 */
+.location-icon {
+  margin-right: 0.25rem;
+  display: inline-flex;
+}
+
+.location-icon svg {
+  width: 1em;
+  height: 1em;
+  color: white;
 }
 </style>
