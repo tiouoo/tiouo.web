@@ -1,6 +1,6 @@
 <template>
   <div class="title-container">
-    <span class="title">tiouo</span>
+    <span class="title"></span>
   </div>
 </template>
 <script setup lang="ts"></script>

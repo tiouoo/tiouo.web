@@ -13,7 +13,7 @@ import HeaderView from './components/HeaderView.vue';
 
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);
-const exposureValue = ref(0.47);
+const exposureValue = ref(0.4);
 
 const updateExposure = () => {
   if (!upBackground.value || !downBackground.value) return;
