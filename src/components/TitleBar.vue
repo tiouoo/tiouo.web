@@ -52,7 +52,7 @@ const scale = computed(() => {
 <style scoped>
 .content {
   display: flex;
-  max-width: 1440px;
+  max-width: 1200px;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;

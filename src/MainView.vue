@@ -5,6 +5,7 @@
     <TitleBar :scrollRatio="scrollRatio" />
     <HeaderView />
     <AboutView />
+    <FotterView />
   </div>
 </template>
 <script setup lang="ts">
@@ -12,6 +13,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import TitleBar from './components/TitleBar.vue';
 import HeaderView from './components/HeaderView.vue';
 import AboutView from './components/AboutView.vue';
+import FotterView from './components/FotterView.vue';
 
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);

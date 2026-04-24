@@ -15,6 +15,10 @@ span {
   user-select: none;
   transition: all 0.1s ease;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
 a:hover,
 a:link,
 a:visited,
@@ -50,7 +54,7 @@ body {
 }
 #app {
   min-width: 100vw;
-  min-height: 300vh;
+  min-height: 100vh;
 }
 ::-webkit-scrollbar {
   width: 8px;

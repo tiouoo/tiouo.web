@@ -43,7 +43,7 @@
           </a>
         </div>
         <div class="btns">
-          <button class="btn">
+          <button class="btn" @click="scrollToAbout">
             <span>About</span>
             <div class="btn-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="down" :class="{ hidden: scrolled }">
+    <div @click="scrollToAbout" class="down" :class="{ hidden: scrolled }">
       <svg fill="#5f656c" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
         <path
           d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
@@ -87,6 +87,10 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const scrolled = ref(false);
 const handleScroll = () => {
   scrolled.value = window.scrollY > 0;
+};
+
+const scrollToAbout = () => {
+  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
 };
 
 // Expose window to template
@@ -136,6 +140,7 @@ onUnmounted(() => {
 <style scoped>
 .down {
   width: 34px;
+  cursor: pointer;
   position: fixed;
   bottom: 24px;
   animation: 1s linear infinite bounce;
