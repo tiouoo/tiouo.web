@@ -1,0 +1,58 @@
+@import url(./value.css);
+
+@font-face {
+  font-family: 'ZhuZiAYuanJWD';
+  src: url(../static/ZhuZiAWan.woff2);
+  font-display: swap;
+  font-weight: lighter;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  color: var(--text-color);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+  transition: none !important;
+}
+body {
+  font-family: 'ZhuZiAYuanJWD', sans-serif !important;
+}
+/* 全局滚动条美化 */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+a:hover,
+a:link,
+a:visited,
+a:active,
+a:focus {
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a {
+  cursor: pointer !important;
+  text-decoration: none !important;
+}
