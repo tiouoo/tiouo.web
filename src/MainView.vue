@@ -15,12 +15,13 @@ import AboutView from './components/AboutView.vue';
 
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);
-const exposureValue = ref(0.5);
+const up = ref(0.1);
+const down = ref(0.6);
 
 const updateExposure = () => {
   if (!upBackground.value || !downBackground.value) return;
-  upBackground.value.style.opacity = exposureValue.value.toString();
-  downBackground.value.style.opacity = (1 - exposureValue.value).toString();
+  upBackground.value.style.opacity = up.value.toString();
+  downBackground.value.style.opacity = down.value.toString();
 };
 
 onMounted(() => {
@@ -33,7 +34,7 @@ onMounted(() => {
   background-image: radial-gradient(
     125% 125% at 50% 100%,
     rgb(0, 0, 0) 20%,
-    oklch(0.74 0.08 245 / 0.2) 100%
+    oklch(0.74 0.08 245 / 0.8) 100%
   );
   will-change: opacity;
   transform: translateZ(0px);

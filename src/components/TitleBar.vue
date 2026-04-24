@@ -2,7 +2,7 @@
   <div class="title-container">
     <div class="left">
       <img class="avatar" src="@/assets/static/avatar.jpg" alt="avatar-title" />
-      <span>Tiouo</span>
+      <span style="color: white">Tiouo</span>
     </div>
     <div class="right">
       <button class="g-btn" @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')">
@@ -17,56 +17,78 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 const windowObj = window;
 </script>
+
 <style scoped>
-.g-btn-icon {
-  margin-left: 10px;
-  width: 18px;
-  height: 18px;
-  fill: black;
-  position: relative;
-  transition: all 0.3s ease !important;
+.title-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 32px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 100;
+  background: transparent;
+  backdrop-filter: blur(2px) saturate(180%);
+  -webkit-backdrop-filter: blur(2px) saturate(180%);
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 60%,
+    rgba(0, 0, 0, 0.8) 80%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 60%,
+    rgba(0, 0, 0, 0.8) 80%,
+    transparent 100%
+  );
 }
 .g-btn {
   padding: 10px 20px;
   border-radius: 999px;
   display: flex;
   align-items: center;
-  border: none;
   font-weight: 600;
   color: black;
   font-family: 'Google Sans Code', sans-serif;
-  margin-right: 15px;
   font-size: 16px;
-  background-color: rgba(255, 255, 255);
+  background: rgba(255, 255, 255);
   cursor: pointer;
-  transition: all 0.2s ease !important;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+.g-btn-icon {
+  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+  fill: black;
+  transition: transform 0.3s ease;
 }
 .g-btn:hover .g-btn-icon {
-  transform: scale(1.25);
-}
-.title-container {
-  position: fixed;
-  padding: 16px 24px;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  transform: scale(1.1);
 }
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  margin-right: 16px;
+  margin-right: 12px;
 }
 .left {
   display: flex;
   align-items: center;
-  font-size: 16px;
-  flex-direction: row;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1d1d1f;
+  letter-spacing: -0.5px;
 }
 span {
   line-height: 1;
