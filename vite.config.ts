@@ -101,13 +101,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vue-vendor': ['vue', 'vue-router', 'pinia'],
-          'antd-vendor': ['ant-design-vue'],
-          'icons-vendor': [
-            '@fortawesome/fontawesome-svg-core',
-            '@fortawesome/free-solid-svg-icons',
-            '@fortawesome/free-brands-svg-icons',
-            '@fortawesome/vue-fontawesome',
-          ],
           'utils-vendor': ['axios'],
         },
       },
