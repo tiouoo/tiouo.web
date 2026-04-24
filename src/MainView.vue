@@ -4,16 +4,18 @@
   <div class="content">
     <TitleBar />
     <HeaderView />
+    <AboutView />
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import TitleBar from './components/TitleBar.vue';
 import HeaderView from './components/HeaderView.vue';
+import AboutView from './components/AboutView.vue';
 
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);
-const exposureValue = ref(0.4);
+const exposureValue = ref(0.5);
 
 const updateExposure = () => {
   if (!upBackground.value || !downBackground.value) return;
@@ -46,9 +48,9 @@ onMounted(() => {
 .down-background {
   background-color: rgb(0, 0, 0);
   background-image: radial-gradient(
-    125% 125% at 50% 0%,
-    rgb(0, 0, 0) 20%,
-    oklch(0.74 0.08 245 / 0.2) 100%
+    ellipse 90% 40% at 50% 100%,
+    lab(69.7546% -8.65325 -26.6605/0.25),
+    transparent 70%
   );
   will-change: opacity;
   transform: translateZ(0px);

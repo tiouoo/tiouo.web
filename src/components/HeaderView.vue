@@ -4,7 +4,7 @@
     <div class="content">
       <img class="avatar" src="@/assets/static/avatar.jpg" alt="avatar" />
       <div class="content-text">
-        <p style="margin-bottom: 16px">
+        <p class="p-input" style="margin-bottom: 16px">
           <span style="color: #00d9ff">user@tiouo</span>
           <span style="color: #69707b">:</span>
           <span style="color: #a78bfa">~</span>
@@ -16,15 +16,15 @@
           <span style="color: white">Tiouo</span>
           <span class="animated" style="color: #00d9ff">_</span>
         </h1>
-        <p style="font-size: 1rem; margin-bottom: 24px">
+        <p class="p-font" style="margin-bottom: 24px">
           <span style="color: #737a83">[ </span>
-          <span style="color: white">Frontend & Backend Developer</span>
+          <span style="color: white">Full-stack Engineer</span>
           <span style="color: #737a83"> | </span>
           <span style="color: white">Designer</span>
           <span style="color: #737a83"> ]</span>
         </p>
         <p class="note">"Forge ahead bravely against all uncertainties."</p>
-        <p style="color: #585f68; font-size: 14px">
+        <p class="p-eye" style="color: #585f68; font-size: 14px">
           <span style="margin-right: 8px">//</span>
           <span>Studying and wanting to make more friends 👀</span>
         </p>
@@ -52,7 +52,7 @@
               </svg>
             </div>
           </button>
-          <button class="btn">
+          <button @click="windowObj.open('https://github.com/tiouoo', '_blank')" class="btn">
             <span>Github</span>
             <div class="btn-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -61,7 +61,7 @@
               </svg>
             </div>
           </button>
-          <button class="g-btn">
+          <button class="g-btn" @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')">
             <span style="position: relative; top: 1px">Get in Touch</span>
             <div class="g-btn-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -73,6 +73,12 @@
         </div>
       </div>
     </div>
+    <div class="down" :class="{ hidden: scrolled }">
+      <svg fill="#5f656c" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+        <path
+          d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
+      </svg>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -82,6 +88,9 @@ const scrolled = ref(false);
 const handleScroll = () => {
   scrolled.value = window.scrollY > 0;
 };
+
+// Expose window to template
+const windowObj = window;
 
 const apps = [
   {
@@ -125,6 +134,24 @@ onUnmounted(() => {
 });
 </script>
 <style scoped>
+.down {
+  width: 34px;
+  position: fixed;
+  bottom: 24px;
+  animation: 1s linear infinite bounce;
+  transition: opacity 0.3s ease !important;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    transform: translateY(-25%);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transform: translateY(0);
+  }
+}
 .btn-icon {
   margin-left: 10px;
   width: 18px;
@@ -132,6 +159,9 @@ onUnmounted(() => {
   fill: white;
   position: relative;
   transition: all 0.3s ease !important;
+}
+.p-font {
+  font-size: 1rem;
 }
 .btn {
   padding: 10px 20px;
@@ -267,7 +297,7 @@ h1 {
   opacity: 1;
   transition: opacity 0.3s ease !important;
 }
-.side-text.hidden {
+.hidden {
   opacity: 0;
   pointer-events: none;
 }
@@ -276,5 +306,58 @@ h1 {
   height: 410px;
   border-radius: 50%;
   margin-right: 50px;
+}
+@media (max-width: 1250px) {
+  .avatar {
+    max-width: 280px;
+    max-height: 280px;
+    width: 44vw;
+    height: 44vw;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  .content {
+    flex-direction: column;
+  }
+  .side-text {
+    left: 0px;
+  }
+  p {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+  }
+  .p-font {
+    font-size: 0.875rem;
+  }
+  .note {
+    font-size: 14px;
+    height: auto;
+    margin-bottom: 12px !important;
+  }
+  .p-input,
+  .p-eye {
+    margin-bottom: 8px !important;
+  }
+  .p-font {
+    margin-bottom: 16px !important;
+  }
+  .apps {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  .content {
+    width: calc(100vw - 66px);
+  }
+  .btns {
+    flex-wrap: wrap;
+  }
+  .btn,
+  .g-btn {
+    margin-bottom: 15px;
+  }
 }
 </style>
