@@ -11,13 +11,6 @@ import MainView from './MainView.vue';
 .root {
   width: 100%;
   height: 100%;
-  background-color: black;
-  background-image: radial-gradient(
-    ellipse 90% 40% at 50% 100%,
-    lab(69.7546% -8.65325 -26.6605/0.25),
-    transparent 70%
-  );
-  background-size: cover;
-  background-attachment: fixed;
+  /* 移除背景设置，让body的格子背景能够显示 */
 }
 </style>
