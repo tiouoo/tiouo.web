@@ -79,11 +79,11 @@
               </div>
             </div>
 
-            <img
+            <!-- <img
               class="project-img right"
               v-if="project.img"
               :src="project.img"
-              :alt="project.repo" />
+              :alt="project.repo" /> -->
           </div>
         </a>
       </div>

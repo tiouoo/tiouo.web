@@ -1,40 +1,49 @@
 <template>
   <div class="header-container">
-    <h2 class="side-text" :class="{ hidden: scrolled }">WELCOME TO TIOUO</h2>
+    <h2 class="side-text animated-element" :class="{ hidden: scrolled }">WELCOME TO TIOUO</h2>
     <div class="content">
-      <img class="avatar" src="@/assets/static/avatar.jpg" alt="avatar" />
+      <img class="avatar animated-avatar" src="@/assets/static/avatar.jpg" alt="avatar" />
       <div class="content-text">
-        <p class="p-input" style="margin-bottom: 16px">
+        <p class="p-input animated-element" style="margin-bottom: 16px; animation-delay: 0.1s">
           <span style="color: #00d9ff">user@tiouo</span>
           <span style="color: #69707b">:</span>
           <span style="color: #a78bfa">~</span>
           <span style="color: #69707b">$</span>
           <span style="color: #f2f2f2"> whoami</span>
         </p>
-        <h1>
+        <h1 class="animated-element" style="animation-delay: 0.2s">
           <span style="color: #8b949e">&gt;</span>
           <span style="color: white">Tiouo</span>
           <span class="animated" style="color: #00d9ff">_</span>
         </h1>
-        <p class="p-font" style="margin-bottom: 24px">
+        <p
+          class="p-font animated-element"
+          style="margin-bottom: 24px; animation-delay: 0.3s"
+          data-delay="0.6">
           <span style="color: #737a83">[ </span>
           <span style="color: white">Full-stack Engineer</span>
           <span style="color: #737a83"> | </span>
           <span style="color: white">Designer</span>
           <span style="color: #737a83"> ]</span>
         </p>
-        <p class="note">"Forge ahead bravely against all uncertainties."</p>
-        <p class="p-eye" style="color: #585f68; font-size: 14px">
+        <p class="note animated-element" style="animation-delay: 0.4s">
+          "Forge ahead bravely against all uncertainties."
+        </p>
+        <p
+          class="p-eye animated-element"
+          style="color: #585f68; font-size: 14px; animation-delay: 0.5s"
+          data-delay="1.0">
           <span style="margin-right: 8px">//</span>
           <span>Studying and wanting to make more friends 👀</span>
         </p>
-        <div class="apps">
+        <div class="apps" style="animation-delay: 0.6s">
           <a
             :href="app.url"
             :target="app.code ? '' : '_blank'"
-            class="app"
-            v-for="app in apps"
-            :key="app.name">
+            class="app animated-element-1"
+            v-for="(app, index) in apps"
+            :key="app.name"
+            :style="{ animationDelay: `${0.55 + index * 0.1}s` }">
             <div class="bg" :style="{ backgroundColor: app.color }"></div>
             <div
               class="icon"
@@ -42,7 +51,7 @@
               v-html="app.icon"></div>
           </a>
         </div>
-        <div class="btns">
+        <div class="btns animated-element" style="animation-delay: 0.85s">
           <button class="btn" @click="scrollToAbout">
             <span>About</span>
             <div class="btn-icon">
@@ -75,7 +84,11 @@
         </div>
       </div>
     </div>
-    <div @click="scrollToAbout" class="down" :class="{ hidden: scrolled }">
+    <div
+      @click="scrollToAbout"
+      class="down animated-element"
+      :class="{ hidden: scrolled }"
+      data-delay="1.6">
       <svg fill="#5f656c" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
         <path
           d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
@@ -313,6 +326,48 @@ h1 {
   height: 410px;
   border-radius: 50%;
   margin-right: 50px;
+}
+.animated-avatar {
+  animation: avatar-scale 0.5s ease-out forwards;
+  transform: scale(0);
+  opacity: 0;
+}
+@keyframes avatar-scale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animated-element {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.255s ease-out forwards;
+}
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animated-element-1 {
+  opacity: 0;
+  animation: fade-in-up-1 0.255s ease-out forwards;
+}
+@keyframes fade-in-up-1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @media (max-width: 1250px) {
   .avatar {

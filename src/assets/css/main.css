@@ -13,7 +13,6 @@ span {
   margin: 0;
   box-sizing: border-box;
   user-select: none;
-  transition: all 0.1s ease;
 }
 html {
   scroll-behavior: smooth;
