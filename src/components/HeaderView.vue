@@ -41,7 +41,7 @@
         </p>
         <div class="apps" style="animation-delay: 0.6s">
           <div
-            @click="app.url.startsWith('mailto:') ? windowObj.open(app.url) : openModal('https://f.tiouo.xyz/t/qq.jpg')"
+            @click="handleAppClick(app)"
             class="app animated-element-1 cursor-pointer"
             v-for="(app, index) in apps"
             :key="app.name"
@@ -92,25 +92,13 @@
           d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
       </svg>
     </div>
-    <!-- 弹窗组件 -->
-    <div v-if="showModal" class="modal-overlay" @click="closeModal">
-      <div class="modal-content" @click.stop>
-        <button class="modal-close" @click="closeModal">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-            <path d="M408 288H176c-22.1 0-40 17.9-40 40v32c0 22.1 17.9 40 40 40H408c22.1 0 40-17.9 40-40v-32c0-22.1-17.9-40-40-40z" fill="#333"/>
-          </svg>
-        </button>
-        <div class="modal-image">
-          <img :src="modalImage" alt="Contact Image" />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-// 导入你的 RGB 阵列数据
+import { ref, inject, onMounted, onUnmounted } from 'vue';
 import { avatarPixels } from '@/assets/avatar';
+
+const openModal = inject<(imageUrl: string) => void>('openModal', () => {});
 
 const scrolled = ref(false);
 const handleScroll = () => {
@@ -121,20 +109,14 @@ const scrollToAbout = () => {
   document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
 };
 
-// Expose window to template
 const windowObj = window;
 
-// 弹窗相关状态管理
-const showModal = ref(false);
-const modalImage = ref('');
-
-const openModal = (imageUrl: string) => {
-  modalImage.value = imageUrl;
-  showModal.value = true;
-};
-
-const closeModal = () => {
-  showModal.value = false;
+const handleAppClick = (app: { url: string }) => {
+  if (app.url.startsWith('mailto:')) {
+    windowObj.open(app.url);
+  } else {
+    openModal('https://f.tiouo.xyz/t/qq.jpg');
+  }
 };
 
 const avatarContainer = ref<HTMLDivElement | null>(null);
@@ -145,16 +127,17 @@ onMounted(() => {
   const container = avatarContainer.value;
   if (!container) return;
 
-  const GRID_SIZE = 79;
-
   let pixelIndex = 0;
-  const totalPixels = GRID_SIZE * 36;
 
   const drawBatch = () => {
-    const pixelsPerBatch = 30;
+    const WIDTH = 79; // 你的相思花宽度
+    const HEIGHT = 36; // 你的相思花高度
+    const totalPixels = WIDTH * HEIGHT;
+    const pixelsPerBatch = 60; // 每一帧绘制的像素数，可以自行调节速度
 
     const draw = () => {
       if (!isTyping.value) return;
+
       for (let i = 0; i < pixelsPerBatch; i++) {
         if (pixelIndex >= totalPixels) {
           isTyping.value = false;
@@ -164,34 +147,45 @@ onMounted(() => {
           return;
         }
 
-        const px = pixelIndex % GRID_SIZE;
-        const py = Math.floor(pixelIndex / GRID_SIZE);
+        // 1. 计算当前像素在 79x36 网格中的坐标
+        const py = Math.floor(pixelIndex / WIDTH); // 行索引 (0 ~ 35)
+        const px = pixelIndex % WIDTH; // 列索引 (0 ~ 78)
 
-        // 每行开始时插入br（除了第一行）
+        // 2. 换行逻辑：每当新的一行开始时（px 为 0），且不是第一行
         if (px === 0 && pixelIndex > 0) {
           const br = document.createElement('br');
-          br.style.margin = '0';
-          br.style.padding = '0';
-          br.style.lineHeight = '1px';
+          // 保持紧凑，防止行间距过大
+          br.style.display = 'block';
+          br.style.content = '""';
+          br.style.marginTop = '-5px'; // 根据你的字体大小微调，消除空隙
           container.appendChild(br);
         }
 
-        const [r, g, b] = avatarPixels[py][px];
+        // 3. 获取颜色并渲染
+        // 确保 avatarPixels[py][px] 存在
+        if (avatarPixels[py] && avatarPixels[py][px]) {
+          const [r, g, b] = avatarPixels[py][px];
+          const pixel = document.createElement('span');
+          pixel.className = 'pixel';
+          pixel.textContent = '█';
+          pixel.style.color = `rgb(${r}, ${g}, ${b})`;
+          // 建议设置特定的字体大小和行高以对齐
+          pixel.style.fontSize = '12px';
+          pixel.style.lineHeight = '1';
 
-        const pixel = document.createElement('span');
-        pixel.className = 'pixel';
-        pixel.textContent = '█';
-        pixel.style.color = `rgb(${r}, ${g}, ${b})`;
-        container.appendChild(pixel);
+          container.appendChild(pixel);
+        }
+
         pixelIndex++;
       }
-    };
-    draw();
-    draw();
 
-    setTimeout(() => {
-      requestAnimationFrame(drawBatch);
-    }, 0.001);
+      // 使用 rAF 递归调用，确保平滑动画
+      if (pixelIndex < totalPixels) {
+        requestAnimationFrame(drawBatch);
+      }
+    };
+
+    draw();
   };
 
   drawBatch();
@@ -515,102 +509,7 @@ h1 {
   }
 }
 
-/* 弹窗样式 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal-content {
-  position: relative;
-  background-color: white;
-  border-radius: 12px;
-  padding: 20px;
-  max-width: 90vw;
-  max-height: 90vh;
-  animation: slideIn 0.5s ease;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
-}
-
-.modal-close:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.modal-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  max-height: 80vh;
-  overflow: hidden;
-}
-
-.modal-image img {
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 8px;
-  animation: scaleIn 0.6s ease;
-}
-
 .cursor-pointer {
   cursor: pointer;
-}
-
-/* 动画效果 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 </style>
