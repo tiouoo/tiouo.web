@@ -1,7 +1,7 @@
 <template>
   <div class="about-container">
     <div class="root">
-      <h2 id="about">MY WORK</h2>
+      <h2 id="work">MY WORK</h2>
       <p class="title-text"><del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer</p>
       <div class="content-body">
         I enjoy making
@@ -45,65 +45,45 @@
 
       <div class="project-container">
         <a
-          href="https://github.com/tiouoo/Aurelio"
+          v-for="(project, index) in projects"
+          :key="index"
+          :href="project.link"
           target="_blank"
-          rel="noopener noreferrer"
-          class="project-card animate-up"
-          style="animation-delay: 0s">
-          <div class="bg-layer">
-            <img
-              alt="aurelio"
-              class="project-img"
-              src="https://f.tiouo.xyz/picgo/20260425035500550.png" />
-          </div>
-          <div class="content-layer">
-            <div class="gradient-mask"></div>
-            <div class="text-content">
-              <h3 class="title">Aurelio (Archived)</h3>
-              <p class="desc">A modern cross-platform desktop workspace.</p>
-            </div>
-          </div>
-        </a>
+          class="project-card">
+          <div class="project-content">
+            <div class="left">
+              <div class="top">
+                <h3 class="project-title">
+                  <div class="project-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                      <path
+                        d="M480 576L192 576C139 576 96 533 96 480L96 160C96 107 139 64 192 64L496 64C522.5 64 544 85.5 544 112L544 400C544 420.9 530.6 438.7 512 445.3L512 512C529.7 512 544 526.3 544 544C544 561.7 529.7 576 512 576L480 576zM192 448C174.3 448 160 462.3 160 480C160 497.7 174.3 512 192 512L448 512L448 448L192 448zM224 216C224 229.3 234.7 240 248 240L424 240C437.3 240 448 229.3 448 216C448 202.7 437.3 192 424 192L248 192C234.7 192 224 202.7 224 216zM248 288C234.7 288 224 298.7 224 312C224 325.3 234.7 336 248 336L424 336C437.3 336 448 325.3 448 312C448 298.7 437.3 288 424 288L248 288z" />
+                    </svg>
+                  </div>
+                  <span>{{ project.repo }}</span>
+                </h3>
+                <p>{{ project.description }}</p>
+              </div>
 
-        <a
-          href="https://github.com/tiouoo/YMCL.Avalonia"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="project-card animate-up"
-          style="animation-delay: 0.1s">
-          <div class="bg-layer">
-            <img
-              alt="ymcl"
-              class="project-img"
-              src="https://f.tiouo.xyz/picgo/20260425035657279.png" />
-          </div>
-          <div class="content-layer">
-            <div class="gradient-mask"></div>
-            <div class="text-content">
-              <h3 class="title">Yu Minecraft Launcher (Archived)</h3>
-              <p class="desc">A simple and cross-platform Minecraft launcher for desktop.</p>
+              <div class="tags">
+                <span
+                  v-for="(tag, tIndex) in project.tags"
+                  :key="tIndex"
+                  class="p-tag"
+                  :style="{
+                    color: `rgb(${tag.color})`,
+                    backgroundColor: `rgb(${tag.color} / 20%)`,
+                  }">
+                  {{ tag.name }}
+                </span>
+              </div>
             </div>
-          </div>
-        </a>
 
-        <a
-          href="https://github.com/tiouoo/TioUi.Avalonia"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="project-card animate-up"
-          style="animation-delay: 0.2s">
-          <div class="bg-layer">
             <img
-              alt="TioUi.Avalonia"
-              class="project-img"
-              src="https://f.tiouo.xyz/picgo/20260425040026557.png" />
-          </div>
-          <div class="content-layer">
-            <div class="gradient-mask"></div>
-            <div class="text-content">
-              <h3 class="title">TioUi.Avalonia</h3>
-              <p class="desc">A modern Avalonia controls library.</p>
-            </div>
+              class="project-img right"
+              v-if="project.img"
+              :src="project.img"
+              :alt="project.repo" />
           </div>
         </a>
       </div>
@@ -111,14 +91,103 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const avaloniaTags = [
+  { name: 'Avalonia', color: '139 69 167' },
+  { name: 'C#', color: '23 134 0' },
+];
+const vueTags = [
+  { name: 'Vue', color: '65 184 131' },
+  { name: 'TypeScript', color: '0 191 255' },
+];
+const projects = [
+  {
+    repo: 'tiouoo / Aurelio',
+    link: 'https://github.com/tiouoo/Aurelio',
+    description: 'A modern and cross-platform workspace solution.',
+    // img: 'https://f.tiouo.xyz/picgo/20260425105739382.png',
+    tags: [...avaloniaTags, { name: 'App', color: '1 220 255' }],
+  },
+  {
+    repo: 'tiouoo / TioUi.Avalonia',
+    link: 'https://github.com/tiouoo/TioUi.Avalonia',
+    description:
+      'Modern Fluent Design components for Avalonia, built for a seamless user experience.',
+    // img: 'https://f.tiouo.xyz/picgo/20260425110416441.png',
+    tags: [...avaloniaTags, { name: 'Library', color: '246 176 35' }],
+  },
+  {
+    repo: 'tiouoo / YMCL.Avalonia',
+    link: 'https://github.com/tiouoo/YMCL.Avalonia',
+    description: 'A modern and cross-platform Minecraft launcher for a seamless gaming experience.',
+    // img: 'https://f.tiouo.xyz/picgo/20260425104546879.png',
+    tags: [...avaloniaTags, { name: 'App', color: '1 220 255' }],
+  },
+  {
+    repo: 'tiouoo / tiouo.web',
+    link: 'https://github.com/tiouoo/tiouo.web',
+    description: 'This website you are browsing.',
+    tags: [...vueTags, { name: 'Web', color: '206 103 141' }],
+  },
+  {
+    repo: 'tiouoo / tiouo.api',
+    link: 'https://github.com/tiouoo/tiouo.api',
+    description: 'A transfer api for convenient functions.',
+    tags: [
+      { name: 'Express.js', color: '215 119 108' },
+      { name: 'TypeScript', color: '0 191 255' },
+      { name: 'API', color: '255 165 0' },
+    ],
+  },
+].sort((a, b) => a.repo.localeCompare(b.repo));
+</script>
 
 <style scoped>
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.project-content {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.tags {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+.p-tag {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+.project-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.project-icon {
+  width: 21px;
+  height: 21px;
+}
+.project-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  fill: white;
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+}
 /* 容器布局 */
 .project-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 25px;
 }
 
 @media (min-width: 768px) {
@@ -126,22 +195,8 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
-/* 卡片基础样式 */
-.project-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: 1rem;
-  aspect-ratio: 4 / 3;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.project-card:hover {
-  background-color: var(--content-1-hover);
+.link-tag {
+  margin-top: 5px;
 }
 
 /* 背景图层与缩放动画 */
@@ -152,18 +207,23 @@
 }
 
 .project-img {
-  width: 100%;
-  height: 100%;
+  margin: 5px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   transition:
-    transform 0.6s ease,
+    transform 0.3s ease,
     opacity 0.5s ease-in-out;
+  border-radius: 100px;
+  opacity: 0.7;
 }
-
 .project-card:hover .project-img {
   transform: scale(1.05);
+  opacity: 1;
 }
-
+.project-card:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
 /* 内容区域 */
 .content-layer {
   position: relative;
@@ -189,7 +249,11 @@
   padding: 1.5rem;
   color: white;
 }
-
+#work {
+  margin-top: 64px;
+  margin-bottom: 32px;
+  font-size: 36px;
+}
 .title {
   font-size: 1.25rem;
   font-weight: bold;
@@ -212,7 +276,9 @@
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
 }
-
+.root {
+  padding: 0 15px;
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -223,17 +289,16 @@
     transform: translateY(0);
   }
 }
-#about {
-  margin-bottom: 32px;
-  font-size: 36px;
-}
 .git-contribution-chart {
   width: 100%;
   margin-top: 20px;
 }
-@media (max-width: 1270px) {
+@media (max-width: 1000px) {
   .git-contribution-chart {
     width: 0%;
+  }
+  .project-container {
+    margin-top: -30px;
   }
 }
 .about-container {

@@ -17,7 +17,7 @@
         <span> Just a curious soul trying to capture every vibrant moment of life.</span>
       </div>
       <div class="photo-gallery">
-        <a
+        <div
           v-for="(photo, index) in photos"
           :key="index"
           :href="photo.url"
@@ -38,7 +38,7 @@
               {{ photo.location ? `${photo.title}, ${photo.location}` : photo.title }}
             </p>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -93,6 +93,9 @@ const photos = [
 </script>
 
 <style scoped>
+.link-tag {
+  margin-top: 5px;
+}
 #about {
   margin-bottom: 32px;
   font-size: 36px;
@@ -105,7 +108,9 @@ const photos = [
 .intro-container > * + * {
   margin-top: 1rem;
 }
-
+.root {
+  padding: 0 15px;
+}
 .intro-container {
   font-family: sans-serif;
   color: #374151;
