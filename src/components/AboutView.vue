@@ -1,12 +1,12 @@
 <template>
   <div class="about-container">
     <div class="root">
-      <h2 id="about">ABOUT ME</h2>
-      <p class="title-text">
+      <h2 id="about" ref="titleRef" class="animate-up">ABOUT ME</h2>
+      <p class="title-text animate-up" ref="subtitleRef">
         <del>Junior High Graduate. </del>
         <strong> Grade 10 Dreamer & Life Enthusiast 🍃</strong>
       </p>
-      <div class="content-body">
+      <div class="content-body animate-up" ref="contentRef">
         <span>Currently navigating the exciting (and slightly chaotic) world of </span>
         <span class="highlight">high school</span>.
         <br />
@@ -23,7 +23,8 @@
           :href="photo.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="gallery-item">
+          class="gallery-item animate-up"
+          :ref="(el) => (photoRefs[index] = el)">
           <img :src="photo.url" :alt="photo.title" class="gallery-img" />
 
           <div class="overlay">
@@ -45,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+
 const photos = [
   {
     title: 'Yichou Jinshi Archway',
@@ -72,7 +75,7 @@ const photos = [
     url: 'https://f.tiouo.xyz/picgo/20260425032334489.png',
   },
   {
-    title: 'Zengcheng',
+    title: 'Tianhe',
     location: 'Canton',
     url: 'https://f.tiouo.xyz/picgo/20260425032559487.jpg',
   },
@@ -90,6 +93,38 @@ const photos = [
     url: 'https://f.tiouo.xyz/picgo/20260425032758314.jpg',
   },
 ];
+
+const titleRef = ref<HTMLElement | null>(null);
+const subtitleRef = ref<HTMLElement | null>(null);
+const contentRef = ref<HTMLElement | null>(null);
+const photoRefs = ref<(HTMLElement | null)[]>([]);
+const observer = ref<IntersectionObserver | null>(null);
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.value?.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  [titleRef.value, subtitleRef.value, contentRef.value, ...photoRefs.value]
+    .filter(Boolean)
+    .forEach((el) => {
+      observer.value?.observe(el!);
+    });
+});
+
+onUnmounted(() => {
+  observer.value?.disconnect();
+});
 </script>
 
 <style scoped>
@@ -238,5 +273,29 @@ const photos = [
   width: 1em;
   height: 1em;
   color: white;
+}
+
+/* 入场动画 */
+.animate-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 为图片添加透明度动画 */
+.gallery-item.animate-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.gallery-item.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

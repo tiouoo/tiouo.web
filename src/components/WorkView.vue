@@ -1,9 +1,9 @@
 <template>
   <div class="about-container">
     <div class="root">
-      <h2 id="work">MY WORK</h2>
-      <p class="title-text"><del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer</p>
-      <div class="content-body">
+      <h2 id="work" ref="titleRef" class="animate-up">MY WORK</h2>
+      <p class="title-text animate-up" ref="subtitleRef"><del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer</p>
+      <div class="content-body animate-up" ref="contentRef">
         I enjoy making
         <a
           href="https://github.com/tiouoo"
@@ -39,7 +39,8 @@
 
       <img
         style="margin-bottom: 32px"
-        class="git-contribution-chart"
+        class="git-contribution-chart animate-up"
+        ref="chartRef"
         src="https://ghchart.rshah.org/409ba5/tiouoo"
         alt="git-contribution-chart" />
 
@@ -49,7 +50,8 @@
           :key="index"
           :href="project.link"
           target="_blank"
-          class="project-card">
+          class="project-card animate-up"
+          :ref="el => projectRefs[index] = el">
           <div class="project-content">
             <div class="left">
               <div class="top">
@@ -92,6 +94,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+
 const avaloniaTags = [
   { name: 'Avalonia', color: '139 69 167' },
   { name: 'C#', color: '23 134 0' },
@@ -140,6 +144,39 @@ const projects = [
     ],
   },
 ].sort((a, b) => a.repo.localeCompare(b.repo));
+
+const titleRef = ref<HTMLElement | null>(null);
+const subtitleRef = ref<HTMLElement | null>(null);
+const contentRef = ref<HTMLElement | null>(null);
+const chartRef = ref<HTMLElement | null>(null);
+const projectRefs = ref<(HTMLElement | null)[]>([]);
+const observer = ref<IntersectionObserver | null>(null);
+
+onMounted(() => {
+  observer.value = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.value?.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  [titleRef.value, subtitleRef.value, contentRef.value, chartRef.value, ...projectRefs.value]
+    .filter(Boolean)
+    .forEach((el) => {
+      observer.value?.observe(el!);
+    });
+});
+
+onUnmounted(() => {
+  observer.value?.disconnect();
+});
 </script>
 
 <style scoped>
@@ -274,20 +311,17 @@ const projects = [
 /* 入场动画 */
 .animate-up {
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
 }
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .root {
   padding: 0 15px;
-}
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 .git-contribution-chart {
   width: 100%;
@@ -437,5 +471,17 @@ const projects = [
   width: 1em;
   height: 1em;
   color: white;
+}
+
+/* 为项目卡片添加动画 */
+.project-card.animate-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.project-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
