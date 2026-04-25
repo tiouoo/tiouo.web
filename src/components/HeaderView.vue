@@ -40,10 +40,9 @@
           <span>Studying and wanting to make more friends 👀</span>
         </p>
         <div class="apps" style="animation-delay: 0.6s">
-          <a
-            :href="app.url"
-            :target="app.code ? '' : '_blank'"
-            class="app animated-element-1"
+          <div
+            @click="app.url.startsWith('mailto:') ? windowObj.open(app.url) : openModal('https://f.tiouo.xyz/t/qq.jpg')"
+            class="app animated-element-1 cursor-pointer"
             v-for="(app, index) in apps"
             :key="app.name"
             :style="{ animationDelay: `${0.55 + index * 0.1}s` }">
@@ -52,7 +51,7 @@
               class="icon"
               :style="{ fill: app.color, width: `${app.size}px`, height: `${app.size}px` }"
               v-html="app.icon"></div>
-          </a>
+          </div>
         </div>
         <div class="btns animated-element" style="animation-delay: 0.85s">
           <button class="btn" @click="scrollToAbout">
@@ -75,7 +74,7 @@
               </svg>
             </div>
           </button>
-          <button class="g-btn" @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')">
+          <button class="g-btn" @click="openModal('https://f.tiouo.xyz/t/qq.jpg')">
             <span style="position: relative; top: 1px">Get in Touch</span>
             <div class="g-btn-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -92,6 +91,19 @@
         <path
           d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z" />
       </svg>
+    </div>
+    <!-- 弹窗组件 -->
+    <div v-if="showModal" class="modal-overlay" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <button class="modal-close" @click="closeModal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <path d="M408 288H176c-22.1 0-40 17.9-40 40v32c0 22.1 17.9 40 40 40H408c22.1 0 40-17.9 40-40v-32c0-22.1-17.9-40-40-40z" fill="#333"/>
+          </svg>
+        </button>
+        <div class="modal-image">
+          <img :src="modalImage" alt="Contact Image" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -111,6 +123,19 @@ const scrollToAbout = () => {
 
 // Expose window to template
 const windowObj = window;
+
+// 弹窗相关状态管理
+const showModal = ref(false);
+const modalImage = ref('');
+
+const openModal = (imageUrl: string) => {
+  modalImage.value = imageUrl;
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
 
 const avatarContainer = ref<HTMLDivElement | null>(null);
 const isTyping = ref(true);
@@ -200,7 +225,7 @@ const apps = [
     name: 'qq',
     size: 22,
     code: true,
-    url: 'javascript:alert("QQ: 840673183")',
+    url: 'https://f.tiouo.xyz/t/qq.jpg',
     color: '#db9807',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M530.1 484.4C518.6 485.8 485.2 431.7 485.2 431.7C485.2 463 469.1 503.9 434.2 533.5C451 538.7 489 552.7 480 567.9C472.7 580.2 354.5 575.8 320.4 571.9C286.3 575.7 168.1 580.2 160.8 567.9C151.8 552.7 189.7 538.7 206.6 533.5C171.7 504 155.5 463.1 155.5 431.7C155.5 431.7 122.2 485.8 110.6 484.4C105.2 483.8 98.2 454.8 119.9 384.7C130.2 351.7 141.9 324.2 160 278.9C156.9 162 205.2 63.9 320.3 63.9C434 63.9 483.5 160 480.6 278.9C498.7 324.1 510.5 351.8 520.7 384.7C542.5 454.8 535.4 483.8 530 484.4z"/></svg>`,
   },
@@ -487,6 +512,105 @@ h1 {
   .btn,
   .g-btn {
     margin-bottom: 15px;
+  }
+}
+
+/* 弹窗样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: slideIn 0.5s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.modal-image img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+  animation: scaleIn 0.6s ease;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 </style>
