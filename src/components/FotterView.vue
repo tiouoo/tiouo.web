@@ -95,7 +95,6 @@ const socialLinks: SocialLink[] = [
   position: relative;
   z-index: 10;
   padding: 4rem 0;
-  margin-top: 5rem;
   background:
     radial-gradient(120% 80% at 30% 100%, rgba(255, 20, 147, 0.15), transparent 50%),
     radial-gradient(100% 60% at 70% 90%, rgba(0, 255, 255, 0.12), transparent 60%),
@@ -103,6 +102,9 @@ const socialLinks: SocialLink[] = [
     radial-gradient(110% 50% at 20% 110%, rgba(255, 215, 0, 0.08), transparent 40%),
     rgba(0, 0, 0, 0.7);
   font-family: 'Google Sans Code', sans-serif;
+  -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  padding-top: 9rem;
 }
 
 .footer-content {
@@ -138,6 +140,7 @@ const socialLinks: SocialLink[] = [
 
 .social-item:hover {
   transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.2); /* var(--text-primary) */
 }
 
 .social-item-inner {

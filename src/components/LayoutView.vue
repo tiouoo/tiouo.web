@@ -2,16 +2,26 @@
   <div ref="upBackground" class="up-background"></div>
   <div ref="downBackground" class="down-background"></div>
   <div class="layout-content">
-    <TitleBar :scrollRatio="scrollRatio" />
+    <TitleBar :scrollRatio="scrollRatioV" />
     <slot></slot>
     <FotterView />
+  </div>
+  <div class="to-top" :class="{ show: scrollRatioV == 1 }" @click="scrollToTop">
+    <div class="ico">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+        <path
+          d="M342.6 73.4C330.1 60.9 309.8 60.9 297.3 73.4L137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7C149.8 291.2 170.1 291.2 182.6 278.7L288 173.3L288 544C288 561.7 302.3 576 320 576C337.7 576 352 561.7 352 544L352 173.3L457.4 278.7C469.9 291.2 490.2 291.2 502.7 278.7C515.2 266.2 515.2 245.9 502.7 233.4L342.7 73.4z" />
+      </svg>
+    </div>
   </div>
 
   <div v-if="showModal" class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
       <button class="modal-close" @click="closeModal">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-          <path d="M408 288H176c-22.1 0-40 17.9-40 40v32c0 22.1 17.9 40 40 40H408c22.1 0 40-17.9 40-40v-32c0-22.1-17.9-40-40-40z" fill="#333"/>
+          <path
+            d="M408 288H176c-22.1 0-40 17.9-40 40v32c0 22.1 17.9 40 40 40H408c22.1 0 40-17.9 40-40v-32c0-22.1-17.9-40-40-40z"
+            fill="#333" />
         </svg>
       </button>
       <div class="modal-image">
@@ -30,9 +40,13 @@ defineProps<{
   scrollRatio?: number;
 }>();
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 const upBackground = ref<HTMLElement | null>(null);
 const downBackground = ref<HTMLElement | null>(null);
-const scrollRatio = ref(0);
+const scrollRatioV = ref(0);
 const up = ref(0.1);
 const down = ref(0.6);
 
@@ -56,7 +70,7 @@ const animate = () => {
 
   up.value = lerp(0.1, 0.4, t);
   down.value = lerp(0.6, 0.2, t);
-  scrollRatio.value = Math.min(1, Math.max(0, scrollY / (window.innerHeight * 0.55)));
+  scrollRatioV.value = Math.min(1, Math.max(0, scrollY / (window.innerHeight * 0.55)));
   updateExposure();
 
   if (t < 1) {
@@ -103,6 +117,38 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.ico {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  top: -1px;
+}
+.to-top {
+  position: fixed;
+  z-index: 100;
+  bottom: 25px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.to-top {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform: translateY(20px);
+}
+.to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 .up-background {
   background-color: rgb(0, 0, 0);
   background-image: radial-gradient(
