@@ -24,7 +24,7 @@ export default defineConfigWithVueTs(
     },
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/src-tauri/**']),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/src-tauri/**', '**/dev-dist/**']),
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
