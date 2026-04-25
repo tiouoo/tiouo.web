@@ -24,7 +24,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="gallery-item animate-up"
-          :ref="(el) => (photoRefs[index] = el)">
+          :ref="(el) => (photoRefs[index] = el as HTMLElement)">
           <img :src="photo.url" :alt="photo.title" class="gallery-img" />
 
           <div class="overlay">

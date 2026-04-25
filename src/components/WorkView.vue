@@ -1,8 +1,11 @@
+<!-- eslint-disable vue/no-deprecated-filter -->
 <template>
   <div class="about-container">
     <div class="root">
       <h2 id="work" ref="titleRef" class="animate-up">MY WORK</h2>
-      <p class="title-text animate-up" ref="subtitleRef"><del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer</p>
+      <p class="title-text animate-up" ref="subtitleRef">
+        <del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer
+      </p>
       <div class="content-body animate-up" ref="contentRef">
         I enjoy making
         <a
@@ -51,7 +54,7 @@
           :href="project.link"
           target="_blank"
           class="project-card animate-up"
-          :ref="el => projectRefs[index] = el">
+          :ref="(el) => (projectRefs[index] = el as HTMLElement | null)">
           <div class="project-content">
             <div class="left">
               <div class="top">
