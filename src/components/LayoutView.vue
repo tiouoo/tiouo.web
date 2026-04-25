@@ -15,14 +15,15 @@
     </div>
   </div>
 
-  <div v-if="showModal" class="modal-overlay" @click="closeModal">
+  <div :class="{ show: showModal }" class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
       <button class="modal-close" @click="closeModal">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-          <path
-            d="M408 288H176c-22.1 0-40 17.9-40 40v32c0 22.1 17.9 40 40 40H408c22.1 0 40-17.9 40-40v-32c0-22.1-17.9-40-40-40z"
-            fill="#333" />
-        </svg>
+        <div style="width: 20px; height: 20px">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <path
+              d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z" />
+          </svg>
+        </div>
       </button>
       <div class="modal-image">
         <img :src="modalImage" alt="Contact Image" />
@@ -201,9 +202,16 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  transform: translateY(-20px);
 }
-
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 .modal-content {
   position: relative;
   background-color: white;
@@ -245,11 +253,10 @@ onUnmounted(() => {
 }
 
 .modal-image img {
-  max-width: 100%;
-  max-height: 80vh;
+  max-width: 340px;
   object-fit: contain;
   border-radius: 8px;
-  animation: scaleIn 0.6s ease;
+  /* animation: scaleIn 0.6s ease; */
 }
 
 @keyframes fadeIn {

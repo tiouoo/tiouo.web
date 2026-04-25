@@ -17,7 +17,7 @@
         <button
           :style="{ width: `${scale * 139}px` }"
           class="g-btn"
-          @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')">
+          @click="openModal('https://f.tiouo.xyz/t/qq.jpg')">
           <span style="position: relative; top: 1px">Contact</span>
           <div class="g-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -32,13 +32,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 const props = defineProps<{
   scrollRatio: number;
 }>();
 
-const windowObj = window;
+const openModal = inject<(imageUrl: string) => void>('openModal', () => {});
 
 const visibleOpacity = computed(() => {
   return props.scrollRatio >= 1 ? 1 : 0;

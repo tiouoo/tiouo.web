@@ -17,9 +17,7 @@
         </a>
       </div>
 
-      <button
-        @click="windowObj.open('https://f.tiouo.xyz/t/qq.jpg', '_blank')"
-        class="touch-button">
+      <button @click="openModal('https://f.tiouo.xyz/t/qq.jpg')" class="touch-button">
         Get in Touch
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
           <g fill="none">
@@ -52,14 +50,15 @@
 </template>
 
 <script setup lang="ts">
+import { inject } from 'vue';
+
 interface SocialLink {
   name: string;
   url: string;
   icon: string;
   isExternal: boolean;
 }
-
-const windowObj = window;
+const openModal = inject<(imageUrl: string) => void>('openModal', () => {});
 
 const socialLinks: SocialLink[] = [
   {
