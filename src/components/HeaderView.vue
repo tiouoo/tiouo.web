@@ -2,11 +2,11 @@
   <div class="header-container">
     <h2 class="side-text" :class="{ hidden: scrolled }">WELCOME TO TIOUO</h2>
     <div class="content">
-      <div
+      <!-- <div
         ref="avatarContainer"
         :class="{ typing: isTypingClass }"
-        class="avatar-container pixel-grid"></div>
-      <!-- <img class="avatar animated-avatar" src="@/assets/static/avatar.jpg" alt="avatar" /> -->
+        class="avatar-container pixel-grid"></div> -->
+      <img class="avatar animated-avatar" src="@/assets/static/avatar.jpg" alt="avatar" />
 
       <div class="content-text">
         <p class="p-input animated-element" style="margin-bottom: 16px; animation-delay: 0.1s">
