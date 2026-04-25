@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /sitemap.xml
+
+Sitemap: https://tiouo.xyz/sitemap.xml
+
+# Block specific directories
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /public/
+
+# Block specific file types
+Disallow: *.js.map
+Disallow: *.css.map
