@@ -171,9 +171,6 @@ onMounted(() => {
           pixel.className = 'pixel';
           pixel.textContent = '█';
           pixel.style.color = `rgb(${r}, ${g}, ${b})`;
-          // 建议设置特定的字体大小和行高以对齐
-          pixel.style.fontSize = '12px';
-          pixel.style.lineHeight = '1';
 
           container.appendChild(pixel);
         }
@@ -190,7 +187,9 @@ onMounted(() => {
     draw();
   };
 
-  drawBatch();
+  setTimeout(() => {
+    drawBatch();
+  }, 300);
 });
 
 const apps = [
@@ -237,9 +236,9 @@ onUnmounted(() => {
 <style>
 .pixel {
   display: inline-block;
-  line-height: 11px;
+  line-height: 13px;
   font-weight: 500;
-  font-size: 9px;
+  font-size: 10px;
   font-family: 'Google Sans Code', monospace;
   margin: 0;
   vertical-align: top;
@@ -446,9 +445,9 @@ h1 {
   pointer-events: none !important;
 }
 .avatar-container {
-  width: 410px;
-  height: 397px;
-  margin-right: 50px;
+  width: 468px;
+  height: 468px;
+  margin-right: 70px;
   overflow: hidden;
   line-height: 0;
   font-size: 0;
