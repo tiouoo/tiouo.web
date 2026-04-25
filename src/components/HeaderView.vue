@@ -2,7 +2,10 @@
   <div class="header-container">
     <h2 class="side-text" :class="{ hidden: scrolled }">WELCOME TO TIOUO</h2>
     <div class="content">
-      <div ref="avatarContainer" class="avatar-container pixel-grid"></div>
+      <div
+        ref="avatarContainer"
+        :class="{ typing: isTypingClass }"
+        class="avatar-container pixel-grid"></div>
       <div class="content-text">
         <p class="p-input animated-element" style="margin-bottom: 16px; animation-delay: 0.1s">
           <span style="color: #00d9ff">user@tiouo</span>
@@ -111,58 +114,62 @@ const windowObj = window;
 
 const avatarContainer = ref<HTMLDivElement | null>(null);
 const isTyping = ref(true);
+const isTypingClass = ref(true);
 
 onMounted(() => {
   const container = avatarContainer.value;
   if (!container) return;
 
   const GRID_SIZE = 79;
-  const DISPLAY_SIZE = 410;
-  const PIXEL_SIZE = Math.floor(DISPLAY_SIZE / GRID_SIZE);
 
-  let rowIndex = 0;
   let pixelIndex = 0;
-  const totalPixels = GRID_SIZE * GRID_SIZE;
+  const totalPixels = GRID_SIZE * 36;
 
   const drawBatch = () => {
     const pixelsPerBatch = 30;
 
-    for (let i = 0; i < pixelsPerBatch; i++) {
-      if (pixelIndex >= totalPixels) {
-        isTyping.value = false;
-        return;
+    const draw = () => {
+      if (!isTyping.value) return;
+      for (let i = 0; i < pixelsPerBatch; i++) {
+        if (pixelIndex >= totalPixels) {
+          isTyping.value = false;
+          setTimeout(() => {
+            isTypingClass.value = false;
+          }, 0);
+          return;
+        }
+
+        const px = pixelIndex % GRID_SIZE;
+        const py = Math.floor(pixelIndex / GRID_SIZE);
+
+        // 每行开始时插入br（除了第一行）
+        if (px === 0 && pixelIndex > 0) {
+          const br = document.createElement('br');
+          br.style.margin = '0';
+          br.style.padding = '0';
+          br.style.lineHeight = '1px';
+          container.appendChild(br);
+        }
+
+        const [r, g, b] = avatarPixels[py][px];
+
+        const pixel = document.createElement('span');
+        pixel.className = 'pixel';
+        pixel.textContent = '█';
+        pixel.style.color = `rgb(${r}, ${g}, ${b})`;
+        container.appendChild(pixel);
+        pixelIndex++;
       }
+    };
+    draw();
+    draw();
 
-      const px = pixelIndex % GRID_SIZE;
-      const py = Math.floor(pixelIndex / GRID_SIZE);
-
-      // 每行开始时插入br（除了第一行）
-      if (px === 0 && pixelIndex > 0) {
-        const br = document.createElement('br');
-        br.style.margin = '0';
-        br.style.padding = '0';
-        br.style.lineHeight = '1px';
-        container.appendChild(br);
-      }
-
-      const [r, g, b] = avatarPixels[py][px];
-
-      const pixel = document.createElement('span');
-      pixel.className = 'pixel';
-      pixel.textContent = '█';
-      pixel.style.color = `rgb(${r}, ${g}, ${b})`;
-      container.appendChild(pixel);
-
-      pixelIndex++;
-    }
-
-    const delay = Math.random() * 15 + 5;
     setTimeout(() => {
       requestAnimationFrame(drawBatch);
-    }, delay);
+    }, 0.001);
   };
 
-  requestAnimationFrame(drawBatch);
+  drawBatch();
 });
 
 const apps = [
@@ -209,16 +216,25 @@ onUnmounted(() => {
 <style>
 .pixel {
   display: inline-block;
-  line-height: 6px;
+  line-height: 11px;
   font-weight: 500;
-  font-size: 6px;
+  font-size: 9px;
   font-family: 'Google Sans Code', monospace;
   margin: 0;
   vertical-align: top;
   padding: 0;
 }
+@media (max-width: 1250px) {
+  .pixel {
+    line-height: 8px;
+    font-size: 6px;
+  }
+}
 </style>
 <style scoped>
+.typing {
+  filter: grayscale(100%) brightness(0.5);
+}
 .down {
   width: 34px;
   cursor: pointer;
@@ -389,12 +405,13 @@ h1 {
 }
 .avatar-container {
   width: 410px;
-  height: 410px;
+  height: 397px;
   margin-right: 50px;
   overflow: hidden;
   line-height: 0;
   font-size: 0;
   white-space: nowrap;
+  transition: all 0.3s ease !important;
 }
 
 .animated-element {
@@ -426,12 +443,7 @@ h1 {
 }
 @media (max-width: 1250px) {
   .avatar-container {
-    max-width: 280px;
-    max-height: 280px;
-    width: 44vw;
-    height: 44vw;
-    margin-right: 0;
-    margin-bottom: 30px;
+    display: none;
   }
   .content {
     flex-direction: column;
