@@ -2,7 +2,7 @@
   <div class="header-container">
     <h2 class="side-text" :class="{ hidden: scrolled }">WELCOME TO TIOUO</h2>
     <div class="content">
-      <img class="avatar animated-avatar" src="@/assets/static/avatar.jpg" alt="avatar" />
+      <div ref="avatarContainer" class="avatar-container pixel-grid"></div>
       <div class="content-text">
         <p class="p-input animated-element" style="margin-bottom: 16px; animation-delay: 0.1s">
           <span style="color: #00d9ff">user@tiouo</span>
@@ -11,7 +11,7 @@
           <span style="color: #69707b">$</span>
           <span style="color: #f2f2f2"> whoami</span>
         </p>
-        <h1 class="animated-element" style="animation-delay: 0.2s">
+        <h1 class="animated-element" data-delay="0.4">
           <span style="color: #8b949e">&gt;</span>
           <span style="color: white">Tiouo</span>
           <span class="animated" style="color: #00d9ff">_</span>
@@ -94,6 +94,8 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+// 导入你的 RGB 阵列数据
+import { avatarPixels } from '@/assets/avatar';
 
 const scrolled = ref(false);
 const handleScroll = () => {
@@ -106,6 +108,62 @@ const scrollToAbout = () => {
 
 // Expose window to template
 const windowObj = window;
+
+const avatarContainer = ref<HTMLDivElement | null>(null);
+const isTyping = ref(true);
+
+onMounted(() => {
+  const container = avatarContainer.value;
+  if (!container) return;
+
+  const GRID_SIZE = 79;
+  const DISPLAY_SIZE = 410;
+  const PIXEL_SIZE = Math.floor(DISPLAY_SIZE / GRID_SIZE);
+
+  let rowIndex = 0;
+  let pixelIndex = 0;
+  const totalPixels = GRID_SIZE * GRID_SIZE;
+
+  const drawBatch = () => {
+    const pixelsPerBatch = 30;
+
+    for (let i = 0; i < pixelsPerBatch; i++) {
+      if (pixelIndex >= totalPixels) {
+        isTyping.value = false;
+        return;
+      }
+
+      const px = pixelIndex % GRID_SIZE;
+      const py = Math.floor(pixelIndex / GRID_SIZE);
+
+      // 每行开始时插入br（除了第一行）
+      if (px === 0 && pixelIndex > 0) {
+        const br = document.createElement('br');
+        br.style.margin = '0';
+        br.style.padding = '0';
+        br.style.lineHeight = '1px';
+        container.appendChild(br);
+      }
+
+      const [r, g, b] = avatarPixels[py][px];
+
+      const pixel = document.createElement('span');
+      pixel.className = 'pixel';
+      pixel.textContent = '█';
+      pixel.style.color = `rgb(${r}, ${g}, ${b})`;
+      container.appendChild(pixel);
+
+      pixelIndex++;
+    }
+
+    const delay = Math.random() * 15 + 5;
+    setTimeout(() => {
+      requestAnimationFrame(drawBatch);
+    }, delay);
+  };
+
+  requestAnimationFrame(drawBatch);
+});
 
 const apps = [
   {
@@ -148,6 +206,18 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 </script>
+<style>
+.pixel {
+  display: inline-block;
+  line-height: 6px;
+  font-weight: 500;
+  font-size: 6px;
+  font-family: 'Google Sans Code', monospace;
+  margin: 0;
+  vertical-align: top;
+  padding: 0;
+}
+</style>
 <style scoped>
 .down {
   width: 34px;
@@ -317,27 +387,16 @@ h1 {
   opacity: 0 !important;
   pointer-events: none !important;
 }
-.avatar {
+.avatar-container {
   width: 410px;
   height: 410px;
-  border-radius: 50%;
   margin-right: 50px;
+  overflow: hidden;
+  line-height: 0;
+  font-size: 0;
+  white-space: nowrap;
 }
-.animated-avatar {
-  animation: avatar-scale 0.5s ease-out forwards;
-  transform: scale(0);
-  opacity: 0;
-}
-@keyframes avatar-scale {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+
 .animated-element {
   opacity: 0;
   transform: translateY(20px);
@@ -366,7 +425,7 @@ h1 {
   }
 }
 @media (max-width: 1250px) {
-  .avatar {
+  .avatar-container {
     max-width: 280px;
     max-height: 280px;
     width: 44vw;
