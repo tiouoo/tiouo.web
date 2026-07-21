@@ -26,7 +26,9 @@
         </div>
       </button>
       <div class="modal-image">
-        <img :src="modalImage" alt="Contact Image" />
+        <img :src="modalImage" style="z-index: 999" alt="Contact Image" />
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <span class="tip" style="color: #404040">QQ + 840673183</span>
       </div>
     </div>
   </div>
@@ -118,6 +120,26 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.tip {
+  position: absolute;
+  bottom: 75px;
+}
+.loading-spinner {
+  width: 42px;
+  height: 42px;
+  bottom: 115px;
+  position: absolute;
+  border: 3px solid #d6dae1;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .ico {
   width: 25px;
   height: 25px;
@@ -250,10 +272,11 @@ onUnmounted(() => {
   max-width: 100%;
   max-height: 80vh;
   overflow: hidden;
+  min-height: 200px;
 }
 
 .modal-image img {
-  max-width: 340px;
+  width: 340px;
   object-fit: contain;
   border-radius: 8px;
   /* animation: scaleIn 0.6s ease; */

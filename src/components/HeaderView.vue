@@ -113,12 +113,13 @@ const scrollToAbout = () => {
 
 const windowObj = window;
 
-const handleAppClick = (app: { url: string }) => {
-  if (app.url.startsWith('mailto:')) {
-    windowObj.open(app.url);
-  } else {
+const handleAppClick = (app: { url: string; code?: boolean }) => {
+  if (app.code) {
     openModal('https://f.tiouo.xyz/t/qq.jpg');
+    return;
   }
+
+  windowObj.open(app.url, '_blank', 'noopener,noreferrer');
 };
 
 const avatarContainer = ref<HTMLDivElement | null>(null);
