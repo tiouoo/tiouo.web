@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-deprecated-filter -->
 <template>
-  <div class="about-container">
+  <div v-if="false" class="about-container">
     <div class="root">
       <h2 id="work" ref="titleRef" class="animate-up">MY WORK</h2>
       <p class="title-text animate-up" ref="subtitleRef">

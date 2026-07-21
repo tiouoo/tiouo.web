@@ -66,6 +66,7 @@
             </div>
           </button>
           <button
+            v-if="false"
             @click="windowObj.open('https://status.tiouo.xyz/status/default', '_blank')"
             class="btn">
             <span>Sites</span>

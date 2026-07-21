@@ -8,11 +8,16 @@ h6,
 span {
   color: var(--text-color);
 }
+@font-face {
+  font-family: 'fff';
+  src: url('../static/f.ttf');
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   user-select: none;
+  font-family: 'fff', 'Google Sans Code', sans-serif !important;
 }
 html {
   scroll-behavior: smooth;
