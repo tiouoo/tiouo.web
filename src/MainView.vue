@@ -1,7 +1,7 @@
 <template>
   <LayoutView>
     <HeaderView />
-    <AboutView />
+    <!-- <AboutView /> -->
     <WorkView />
   </LayoutView>
 </template>
