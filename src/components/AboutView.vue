@@ -16,7 +16,7 @@
         <a href="javascript:void(0)" class="link-tag">golden sunset</a>.
         <span> Just a curious soul trying to capture every vibrant moment of life.</span>
       </div>
-      <div class="photo-gallery">
+      <div v-if="false" class="photo-gallery">
         <div
           v-for="(photo, index) in photos"
           :key="index"
