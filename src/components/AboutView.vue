@@ -52,45 +52,45 @@ const photos = [
   {
     title: 'Yichou Jinshi Archway',
     location: 'Canton',
-    url: 'https://f.tiouo.xyz/picgo/20260425032037513.jpg',
+    url: '/img/picgo/20260425032037513.jpg',
   },
   {
     title: 'Red Bay',
     location: 'Shanwei',
-    url: 'https://f.tiouo.xyz/picgo/20260425030629520.jpg',
+    url: '/img/picgo/20260425030629520.jpg',
   },
   {
     title: 'Kang Park',
     location: 'Canton',
-    url: 'https://f.tiouo.xyz/picgo/20260425031501975.jpg',
+    url: '/img/picgo/20260425031501975.jpg',
   },
   {
     title: 'Tianhe',
     location: 'Canton',
-    url: 'https://f.tiouo.xyz/picgo/20260425033252306.jpg',
+    url: '/img/picgo/20260425033252306.jpg',
   },
   {
     title: 'Zengcheng',
     location: 'Canton',
-    url: 'https://f.tiouo.xyz/picgo/20260425032334489.png',
+    url: '/img/picgo/20260425032334489.png',
   },
   {
     title: 'Tianhe',
     location: 'Canton',
-    url: 'https://f.tiouo.xyz/picgo/20260425032559487.jpg',
+    url: '/img/picgo/20260425032559487.jpg',
   },
   {
     title: 'Pig',
-    url: 'https://f.tiouo.xyz/picgo/20260425033049464.jpg',
+    url: '/img/picgo/20260425033049464.jpg',
   },
   {
     title: 'Lottus',
     location: 'Yunnan',
-    url: 'https://f.tiouo.xyz/picgo/20260425030629521.jpg',
+    url: '/img/picgo/20260425030629521.jpg',
   },
   {
     title: 'Chicken',
-    url: 'https://f.tiouo.xyz/picgo/20260425032758314.jpg',
+    url: '/img/picgo/20260425032758314.jpg',
   },
 ];
 

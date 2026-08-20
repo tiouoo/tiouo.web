@@ -17,7 +17,7 @@
         <button
           :style="{ width: `${scale * 139}px` }"
           class="g-btn"
-          @click="openModal('https://f.tiouo.xyz/t/qq.jpg')">
+          @click="openModal('/img/t/qq.jpg')">
           <span style="position: relative; top: 1px">Contact</span>
           <div class="g-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">

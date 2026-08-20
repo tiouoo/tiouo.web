@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Allow: /sitemap.xml
 
-Sitemap: https://tiouo.xyz/sitemap.xml
+Sitemap: https://tiouo.cc/sitemap.xml
 
 # Block specific directories
 Disallow: /node_modules/

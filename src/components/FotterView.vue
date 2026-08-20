@@ -17,7 +17,7 @@
         </a>
       </div>
 
-      <button @click="openModal('https://f.tiouo.xyz/t/qq.jpg')" class="touch-button">
+      <button @click="openModal('/img/t/qq.jpg')" class="touch-button">
         Get in Touch
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
           <g fill="none">
