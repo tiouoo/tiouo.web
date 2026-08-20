@@ -1,0 +1,15 @@
+name = "tiouo-web"
+main = "src/worker.js"
+compatibility_date = "2026-08-20"
+
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
+
+[[routes]]
+pattern = "tiouo.cc/*"
+zone_name = "tiouo.cc"
+
+[[routes]]
+pattern = "www.tiouo.cc/*"
+zone_name = "tiouo.cc"

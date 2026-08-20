@@ -1,0 +1,22 @@
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    if (url.hostname === 'www.tiouo.cc') {
+      url.hostname = 'tiouo.cc';
+      return Response.redirect(url.toString(), 301);
+    }
+
+    const response = await env.ASSETS.fetch(request);
+
+    const responseHeaders = new Headers(response.headers);
+    responseHeaders.set('X-Content-Type-Options', 'nosniff');
+    responseHeaders.set('Referrer-Policy', 'no-referrer');
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: responseHeaders,
+    });
+  },
+};
