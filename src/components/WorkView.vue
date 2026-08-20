@@ -112,7 +112,6 @@ const projects = [
     repo: 'tiouoo / Aurelio',
     link: 'https://github.com/tiouoo/Aurelio',
     description: 'A modern and cross-platform workspace solution.',
-    // img: 'https://f.tiouo.xyz/picgo/20260425105739382.png',
     tags: [...avaloniaTags, { name: 'App', color: '1 220 255' }],
   },
   {
@@ -120,14 +119,12 @@ const projects = [
     link: 'https://github.com/tiouoo/TioUi.Avalonia',
     description:
       'Modern Fluent Design components for Avalonia, built for a seamless user experience.',
-    // img: 'https://f.tiouo.xyz/picgo/20260425110416441.png',
     tags: [...avaloniaTags, { name: 'Library', color: '246 176 35' }],
   },
   {
     repo: 'tiouoo / YMCL.Avalonia',
     link: 'https://github.com/tiouoo/YMCL.Avalonia',
     description: 'A modern and cross-platform Minecraft launcher for a seamless gaming experience.',
-    // img: 'https://f.tiouo.xyz/picgo/20260425104546879.png',
     tags: [...avaloniaTags, { name: 'App', color: '1 220 255' }],
   },
   {
