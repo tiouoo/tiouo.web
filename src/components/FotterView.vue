@@ -100,7 +100,7 @@ const socialLinks: SocialLink[] = [
     radial-gradient(90% 70% at 50% 80%, rgba(138, 43, 226, 0.18), transparent 65%),
     radial-gradient(110% 50% at 20% 110%, rgba(255, 215, 0, 0.08), transparent 40%),
     rgba(0, 0, 0, 0.7);
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'fff', sans-serif;
   -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
   mask-image: linear-gradient(to top, black 80%, transparent 100%);
   padding-top: 9rem;
@@ -192,7 +192,7 @@ const socialLinks: SocialLink[] = [
   background: #fff; /* var(--text-primary) */
   color: #000; /* var(--color-black) */
   cursor: pointer;
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'fff', sans-serif;
 }
 
 .touch-button:hover {

@@ -336,7 +336,7 @@ onUnmounted(() => {
   }
 }
 .about-container {
-  font-family: 'Google Sans Flex', sans-serif;
+  font-family: 'fff', sans-serif;
   max-width: 1200px;
   margin: 0 auto;
 }

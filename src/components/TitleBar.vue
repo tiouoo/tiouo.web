@@ -94,7 +94,7 @@ const scale = computed(() => {
   align-items: center;
   font-weight: 600;
   color: black;
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'fff', sans-serif;
   font-size: 16px;
   background: rgba(255, 255, 255);
   cursor: pointer;

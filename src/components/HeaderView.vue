@@ -241,7 +241,7 @@ onUnmounted(() => {
   line-height: 13px;
   font-weight: 500;
   font-size: 10px;
-  font-family: 'Google Sans Code', monospace;
+  font-family: 'fff', monospace;
   margin: 0;
   vertical-align: top;
   padding: 0;
@@ -316,7 +316,7 @@ onUnmounted(() => {
   border: none;
   font-weight: 600;
   color: white;
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'fff', sans-serif;
   margin-right: 15px;
   font-size: 16px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -345,7 +345,7 @@ onUnmounted(() => {
   border: none;
   font-weight: 600;
   color: black;
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'fff', sans-serif;
   margin-right: 15px;
   font-size: 16px;
   background-color: rgba(255, 255, 255);
@@ -427,7 +427,7 @@ h1 {
   max-width: 1152px;
 }
 .content-text {
-  font-family: 'Google Sans Code', sans-serif;
+  font-family: 'fff', sans-serif;
 }
 .side-text {
   writing-mode: vertical-rl;

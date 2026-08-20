@@ -1,4 +1,8 @@
-@import url(font.css);
+@font-face {
+  font-family: 'fff';
+  font-display: swap;
+  src: url('../static/f.ttf');
+}
 h1,
 h2,
 h3,
@@ -8,16 +12,12 @@ h6,
 span {
   color: var(--text-color);
 }
-@font-face {
-  font-family: 'fff';
-  src: url('../static/f.ttf');
-}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   user-select: none;
-  font-family: 'fff', 'Google Sans Code', sans-serif !important;
+  font-family: 'fff', sans-serif !important;
 }
 html {
   scroll-behavior: smooth;
@@ -54,7 +54,7 @@ body {
   margin: 0;
   position: relative;
   overflow-x: hidden;
-  font-family: 'Google Sans Flex', sans-serif;
+  font-family: 'fff', sans-serif;
 }
 #app {
   min-width: 100vw;
