@@ -46,7 +46,7 @@ const pwaConfig = {
         },
       },
       {
-        urlPattern: /^https:\/\/(cdn|sdk|cloud|umami)\..*/i,
+        urlPattern: /^https:\/\/(cdn|sdk|cloud)\..*/i,
         handler: 'NetworkFirst',
         options: {
           cacheName: 'cdn-cache',
