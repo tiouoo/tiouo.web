@@ -25,7 +25,7 @@
         </a>
         <span> or just </span>
         <a
-          href="https://status.tiouo.xyz/status/default"
+          href="https://status.tiouo.cc/status/default"
           target="_blank"
           rel="noopener noreferrer"
           class="link-tag"
