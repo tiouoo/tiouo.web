@@ -33,7 +33,7 @@
 
     <div class="footer-bottom">
       <h1 class="brand-text">
-        <span class="brand-name">Tiouo</span>
+        <span class="brand-name" id="foot-element">Tiouo</span>
         <p class="copyright">
           (c) 2026-present
           <a

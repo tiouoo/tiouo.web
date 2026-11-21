@@ -109,7 +109,7 @@ const handleScroll = () => {
 };
 
 const scrollToAbout = () => {
-  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('foot-element')?.scrollIntoView({ behavior: 'smooth' });
 };
 
 const windowObj = window;
