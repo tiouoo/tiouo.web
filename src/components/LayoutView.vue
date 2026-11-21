@@ -259,6 +259,7 @@ onUnmounted(() => {
   justify-content: center;
   border-radius: 50%;
   transition: background-color 0.2s ease;
+  z-index: 9999999;
 }
 
 .modal-close:hover {
