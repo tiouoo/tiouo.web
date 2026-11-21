@@ -14,10 +14,7 @@
         <span style="color: white; opacity: visibleOpacity">Tiouo</span>
       </div>
       <div class="right">
-        <button
-          :style="{ width: `${scale * 139}px` }"
-          class="g-btn"
-          @click="openModal('/img/t/qq.png')">
+        <button class="g-btn" :disabled="!visibleOpacity" @click="openModal('/img/t/qq.png')">
           <span style="position: relative; top: 1px">Contact</span>
           <div class="g-btn-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -87,6 +84,7 @@ const scale = computed(() => {
   transition: opacity 0.3s ease;
 }
 .g-btn {
+  min-width: 139px;
   padding: 10px 20px;
   border-radius: 999px;
   display: flex;
@@ -96,11 +94,17 @@ const scale = computed(() => {
   color: black;
   font-family: 'fff', sans-serif;
   font-size: 16px;
+  white-space: nowrap;
   background: rgba(255, 255, 255);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.3s ease;
+}
+.g-btn:disabled {
+  transform: translateY(-6px);
+  pointer-events: none;
 }
 .g-btn-icon {
+  flex-shrink: 0;
   margin-left: 10px;
   width: 18px;
   height: 18px;
@@ -109,6 +113,11 @@ const scale = computed(() => {
 }
 .g-btn:hover .g-btn-icon {
   transform: scale(1.1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .g-btn:disabled {
+    transform: none;
+  }
 }
 .avatar {
   width: 42px;
