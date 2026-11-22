@@ -8,9 +8,9 @@ const pwaConfig = {
   },
   includeAssets: ['favicon.ico', 'icon-192.png', 'icon-512.png'],
   manifest: {
-    name: 'tiouo',
-    short_name: 'tiouo',
-    description: 'tiouo',
+    name: 'chilo.top',
+    short_name: 'chilo.top',
+    description: 'chilo.top',
     theme_color: '#ffffff',
     background_color: '#ffffff',
     display: 'standalone',
