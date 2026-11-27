@@ -6,7 +6,7 @@
         ref="avatarContainer"
         :class="{ typing: isTypingClass }"
         class="avatar-container pixel-grid"></div> -->
-      <img class="avatar animated-avatar" src="@/assets/static/avatar.jpg" alt="avatar" />
+      <img class="avatar animated-avatar" src="@/assets/static/avatar.png" alt="avatar" />
 
       <div class="content-text">
         <p class="p-input animated-element" style="margin-bottom: 16px; animation-delay: 0.1s">

@@ -9,7 +9,7 @@
             width: `${scale * 42}px`,
             height: `${scale * 42}px`,
           }"
-          src="@/assets/static/avatar.jpg"
+          src="@/assets/static/avatar.png"
           alt="avatar-title" />
         <span style="color: white; opacity: visibleOpacity">Tiouo</span>
       </div>
