@@ -84,7 +84,6 @@ const scale = computed(() => {
   transition: opacity 0.3s ease;
 }
 .g-btn {
-  min-width: 139px;
   padding: 10px 20px;
   border-radius: 999px;
   display: flex;
