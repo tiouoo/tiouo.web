@@ -34,8 +34,8 @@
         </a>
       </div>
 
-      <div class="project-container">
-        <article class="project-card project-card-wide animate-up" ref="websiteRef">
+      <div class="project-container" ref="projectContainer">
+        <article class="project-card project-card-wide animate-up">
           <h3 class="project-title">tiouo.web</h3>
           <p class="project-description">{{ copy.website }}</p>
 
@@ -57,7 +57,7 @@
             </a>
           </div>
         </article>
-        <article class="project-card animate-up" ref="ovouiRef">
+        <article class="project-card animate-up">
           <h3 class="project-title">OvoUi.Avalonia</h3>
           <p class="project-description">
             {{ copy.ovoui }}
@@ -91,6 +91,44 @@
             </a>
           </div>
         </article>
+        <article
+          v-for="project in additionalProjects"
+          :key="project.name"
+          class="project-card animate-up">
+          <h3 class="project-title">{{ project.name }}</h3>
+          <p class="project-description">{{ copy[project.description] }}</p>
+          <ul class="tags" :aria-label="copy.technologies">
+            <li
+              v-for="technology in project.technologies"
+              :key="technology"
+              class="p-tag"
+              :style="{ '--tag-color': technologyColors[technology] }">
+              {{ technology }}
+            </li>
+          </ul>
+          <div class="project-actions">
+            <a
+              class="project-action"
+              :href="project.github"
+              target="_blank"
+              rel="noopener noreferrer"
+              :aria-label="`${project.name} · GitHub`">
+              <span class="iconfont icon-github" aria-hidden="true"></span>
+              <span class="github-label">GitHub</span>
+            </a>
+            <a
+              v-if="project.demo"
+              class="project-action project-demo arrow-action"
+              :href="project.demo"
+              target="_blank"
+              rel="noopener noreferrer">
+              {{ copy.demo }}
+              <span class="arrow-action-icon">
+                <span class="iconfont icon-arrow-right" aria-hidden="true"></span>
+              </span>
+            </a>
+          </div>
+        </article>
       </div>
     </div>
   </div>
@@ -103,9 +141,42 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const titleRef = ref<HTMLElement | null>(null);
 const subtitleRef = ref<HTMLElement | null>(null);
 const contentRef = ref<HTMLElement | null>(null);
-const websiteRef = ref<HTMLElement | null>(null);
-const ovouiRef = ref<HTMLElement | null>(null);
+const projectContainer = ref<HTMLElement | null>(null);
 const observer = ref<IntersectionObserver | null>(null);
+
+const technologyColors = {
+  JavaScript: '247 223 30',
+  React: '97 218 251',
+  'Cloudflare Email Workers': '251 153 76',
+  Turso: '79 220 191',
+  Vue: '65 184 131',
+  Hono: '255 140 92',
+  'Express.js': '104 163 255',
+};
+
+const additionalProjects = [
+  {
+    name: 'Tmail',
+    description: 'tmail',
+    technologies: ['React', 'JavaScript', 'Cloudflare Email Workers', 'Turso'],
+    github: 'https://github.com/tiouoo/tmail',
+    demo: 'https://tmail.chilo.top/',
+  },
+  {
+    name: 'Cloudflare Analytics',
+    description: 'cloudflareAnalytics',
+    technologies: ['Vue', 'JavaScript', 'Hono'],
+    github: 'https://github.com/tiouoo/cloudflare-analytics',
+    demo: 'https://cf.chilo.top/',
+  },
+  {
+    name: 'Orbit',
+    description: 'orbit',
+    technologies: ['Vue', 'JavaScript', 'Express.js', 'Turso'],
+    github: 'https://github.com/tiouoo/orbit',
+    demo: null,
+  },
+] as const;
 
 onMounted(() => {
   observer.value = new IntersectionObserver(
@@ -122,11 +193,10 @@ onMounted(() => {
     }
   );
 
-  [titleRef.value, subtitleRef.value, contentRef.value, websiteRef.value, ovouiRef.value]
-    .filter(Boolean)
-    .forEach((el) => {
-      observer.value?.observe(el!);
-    });
+  const cards = projectContainer.value?.querySelectorAll('.project-card') ?? [];
+  [titleRef.value, subtitleRef.value, contentRef.value, ...cards].forEach((element) => {
+    if (element) observer.value?.observe(element);
+  });
 });
 
 onUnmounted(() => {

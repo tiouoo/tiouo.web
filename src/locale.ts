@@ -45,6 +45,18 @@ const messages = {
   library: ['Library', '组件库'],
   ovouiGitHub: ['OvoUi.Avalonia on GitHub', '在 GitHub 上查看 OvoUi.Avalonia'],
   demo: ['Open Demo', '查看演示'],
+  tmail: [
+    'A temporary email service with disposable inboxes, email forwarding, and archiving.',
+    '支持一次性收件箱、邮件转发和归档的临时邮箱服务',
+  ],
+  cloudflareAnalytics: [
+    'A dashboard for Cloudflare traffic, cache performance, and security at the account and site levels.',
+    '集中查看 Cloudflare 账户及各站点的流量、缓存命中率和安全事件',
+  ],
+  orbit: [
+    'An application telemetry dashboard for tracking events, usage trends, and user geography.',
+    '用于查看应用事件、使用趋势和用户地域分布的遥测分析平台',
+  ],
   email: ['Email', '邮箱'],
   titleAvatar: ['avatar-title', 'Tiouo 的头像'],
   contact: ['Contact', '联系我'],
