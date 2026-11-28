@@ -7,7 +7,7 @@ import App from './App.vue';
 import { isChinese } from './locale';
 
 if (isChinese) {
-  const canonicalUrl = 'https://tiouo.cc/zh';
+  const canonicalUrl = 'https://chilo.top/zh';
 
   document.documentElement.lang = 'zh-CN';
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);

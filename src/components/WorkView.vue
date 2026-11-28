@@ -22,7 +22,7 @@
         </a>
         <span>{{ copy.orJust }}</span>
         <a
-          href="https://status.tiouo.cc/status/default"
+          href="https://status.chilo.top/status/default"
           target="_blank"
           rel="noopener noreferrer"
           class="link-tag"

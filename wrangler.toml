@@ -9,9 +9,9 @@ run_worker_first = true
 not_found_handling = "single-page-application"
 
 [[routes]]
-pattern = "tiouo.cc/*"
-zone_name = "tiouo.cc"
+pattern = "chilo.top/*"
+zone_name = "chilo.top"
 
 [[routes]]
-pattern = "www.tiouo.cc/*"
-zone_name = "tiouo.cc"
+pattern = "www.chilo.top/*"
+zone_name = "chilo.top"

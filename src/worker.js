@@ -2,8 +2,8 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    if (url.hostname === 'www.tiouo.cc') {
-      url.hostname = 'tiouo.cc';
+    if (url.hostname === 'www.chilo.top') {
+      url.hostname = 'chilo.top';
       return Response.redirect(url.toString(), 301);
     }
 

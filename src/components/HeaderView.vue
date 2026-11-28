@@ -63,7 +63,7 @@
           </button>
           <button
             v-if="false"
-            @click="windowObj.open('https://status.tiouo.cc/status/default', '_blank')"
+            @click="windowObj.open('https://status.chilo.top/status/default', '_blank')"
             class="btn arrow-action">
             <span>{{ copy.sites }}</span>
             <div class="arrow-action-icon">
@@ -186,7 +186,7 @@ const apps = [
   {
     name: 'email',
     size: 20,
-    url: 'mailto:i@tiouo.cc',
+    url: 'mailto:i@chilo.top',
     color: '#f47060',
     icon: 'icon-email-app',
   },
