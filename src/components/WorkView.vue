@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-deprecated-filter -->
 <template>
-  <div v-if="false" class="about-container">
+  <div class="about-container">
     <div class="root">
       <h2 id="work" ref="titleRef" class="animate-up">MY WORK</h2>
       <p class="title-text animate-up" ref="subtitleRef">
@@ -109,41 +109,19 @@ const vueTags = [
 ];
 const projects = [
   {
-    repo: 'tiouoo / Aurelio',
-    link: 'https://github.com/tiouoo/Aurelio',
-    description: 'A modern and cross-platform workspace solution.',
-    tags: [...avaloniaTags, { name: 'App', color: '1 220 255' }],
-  },
-  {
-    repo: 'tiouoo / TioUi.Avalonia',
-    link: 'https://github.com/tiouoo/TioUi.Avalonia',
-    description:
-      'Modern Fluent Design components for Avalonia, built for a seamless user experience.',
-    tags: [...avaloniaTags, { name: 'Library', color: '246 176 35' }],
-  },
-  {
-    repo: 'tiouoo / YMCL.Avalonia',
-    link: 'https://github.com/tiouoo/YMCL.Avalonia',
-    description: 'A modern and cross-platform Minecraft launcher for a seamless gaming experience.',
-    tags: [...avaloniaTags, { name: 'App', color: '1 220 255' }],
-  },
-  {
     repo: 'tiouoo / tiouo.web',
     link: 'https://github.com/tiouoo/tiouo.web',
     description: 'This website you are browsing.',
     tags: [...vueTags, { name: 'Web', color: '206 103 141' }],
   },
   {
-    repo: 'tiouoo / tiouo.api',
-    link: 'https://github.com/tiouoo/tiouo.api',
-    description: 'A transfer api for convenient functions.',
-    tags: [
-      { name: 'Express.js', color: '215 119 108' },
-      { name: 'TypeScript', color: '0 191 255' },
-      { name: 'API', color: '255 165 0' },
-    ],
+    repo: 'tiouoo / OvoUi.Avalonia',
+    link: 'https://github.com/tiouoo/OvoUi.Avalonia',
+    description:
+      'Modern Fluent Design components for Avalonia, built for a seamless user experience.',
+    tags: [...avaloniaTags, { name: 'Library', color: '246 176 35' }],
   },
-].sort((a, b) => a.repo.localeCompare(b.repo));
+];
 
 const titleRef = ref<HTMLElement | null>(null);
 const subtitleRef = ref<HTMLElement | null>(null);
@@ -334,11 +312,6 @@ onUnmounted(() => {
   .project-container {
     margin-top: -30px;
   }
-}
-.about-container {
-  font-family: 'fff', sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 .intro-container > * + * {
   margin-top: 1rem;

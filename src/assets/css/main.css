@@ -70,3 +70,22 @@ body {
 ::-webkit-scrollbar-track {
   background: #010101;
 }
+.about-container {
+  font-family: 'fff', sans-serif;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+@media (max-width: 768px) {
+  .about-container {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 480px) {
+  .about-container {
+    padding: 0 10px;
+  }
+  .side-text {
+    display: none;
+  }
+}

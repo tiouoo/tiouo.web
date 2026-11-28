@@ -3,8 +3,7 @@
     <div class="root">
       <h2 id="about" ref="titleRef" class="animate-up">ABOUT ME</h2>
       <p class="title-text animate-up" ref="subtitleRef">
-        <del>Junior High Graduate. </del>
-        <strong> Grade 10 Dreamer & Life Enthusiast 🍃</strong>
+        <strong> Student. 🍃</strong>
       </p>
       <div class="content-body animate-up" ref="contentRef">
         <span>Currently navigating the exciting (and slightly chaotic) world of </span>
@@ -43,11 +42,9 @@ onMounted(() => {
     }
   );
 
-  [titleRef.value, subtitleRef.value, contentRef.value]
-    .filter(Boolean)
-    .forEach((el) => {
-      observer.value?.observe(el!);
-    });
+  [titleRef.value, subtitleRef.value, contentRef.value].filter(Boolean).forEach((el) => {
+    observer.value?.observe(el!);
+  });
 });
 
 onUnmounted(() => {
@@ -63,11 +60,7 @@ onUnmounted(() => {
   margin-bottom: 32px;
   font-size: 36px;
 }
-.about-container {
-  font-family: 'fff', sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+
 .intro-container > * + * {
   margin-top: 1rem;
 }
