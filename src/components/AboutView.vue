@@ -15,6 +15,11 @@
         <a href="javascript:void(0)" class="link-tag">golden sunset</a>.
         <span> Just a curious soul trying to capture every vibrant moment of life.</span>
       </div>
+      <img
+        class="git-contribution-chart animate-up"
+        ref="chartRef"
+        src="https://ghchart.rshah.org/409ba5/tiouoo"
+        alt="GitHub contribution chart for tiouoo" />
     </div>
   </div>
 </template>
@@ -25,6 +30,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const titleRef = ref<HTMLElement | null>(null);
 const subtitleRef = ref<HTMLElement | null>(null);
 const contentRef = ref<HTMLElement | null>(null);
+const chartRef = ref<HTMLImageElement | null>(null);
 const observer = ref<IntersectionObserver | null>(null);
 
 onMounted(() => {
@@ -42,7 +48,7 @@ onMounted(() => {
     }
   );
 
-  [titleRef.value, subtitleRef.value, contentRef.value].filter(Boolean).forEach((el) => {
+  [titleRef.value, subtitleRef.value, contentRef.value, chartRef.value].filter(Boolean).forEach((el) => {
     observer.value?.observe(el!);
   });
 });
@@ -80,6 +86,12 @@ onUnmounted(() => {
 
 .content-body {
   line-height: 1.6;
+}
+
+.git-contribution-chart {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .link-tag {

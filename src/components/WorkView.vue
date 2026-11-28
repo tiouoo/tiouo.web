@@ -40,13 +40,6 @@
         </a>
       </div>
 
-      <img
-        style="margin-bottom: 32px"
-        class="git-contribution-chart animate-up"
-        ref="chartRef"
-        src="https://ghchart.rshah.org/409ba5/tiouoo"
-        alt="git-contribution-chart" />
-
       <div class="project-container">
         <a
           v-for="(project, index) in projects"
@@ -126,7 +119,6 @@ const projects = [
 const titleRef = ref<HTMLElement | null>(null);
 const subtitleRef = ref<HTMLElement | null>(null);
 const contentRef = ref<HTMLElement | null>(null);
-const chartRef = ref<HTMLElement | null>(null);
 const projectRefs = ref<(HTMLElement | null)[]>([]);
 const observer = ref<IntersectionObserver | null>(null);
 
@@ -145,7 +137,7 @@ onMounted(() => {
     }
   );
 
-  [titleRef.value, subtitleRef.value, contentRef.value, chartRef.value, ...projectRefs.value]
+  [titleRef.value, subtitleRef.value, contentRef.value, ...projectRefs.value]
     .filter(Boolean)
     .forEach((el) => {
       observer.value?.observe(el!);
@@ -203,6 +195,7 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 25px;
+  margin-top: 32px;
 }
 
 @media (min-width: 768px) {
@@ -300,18 +293,6 @@ onUnmounted(() => {
 
 .root {
   padding: 0 15px;
-}
-.git-contribution-chart {
-  width: 100%;
-  margin-top: 20px;
-}
-@media (max-width: 1000px) {
-  .git-contribution-chart {
-    width: 0%;
-  }
-  .project-container {
-    margin-top: -30px;
-  }
 }
 .intro-container > * + * {
   margin-top: 1rem;
