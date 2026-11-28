@@ -7,6 +7,17 @@
     <link rel="icon" href="/src/assets/static/icon.svg" />
     <meta name="referrer" content="never" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = location.hash ? 'auto' : 'manual';
+      }
+
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted && !location.hash) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+      });
+    </script>
     <meta name="theme-color" content="#ffffff" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <title>Hello^v^ ~ Tiouo.</title>
