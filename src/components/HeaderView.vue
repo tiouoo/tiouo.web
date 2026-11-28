@@ -55,18 +55,18 @@
           </div>
         </div>
         <div class="btns animated-element" style="animation-delay: 0.85s">
-          <button class="btn" @click="scrollToAbout">
+          <button class="btn arrow-action" @click="scrollToAbout">
             <span>About</span>
-            <div class="btn-icon">
+            <div class="arrow-action-icon">
               <span class="iconfont icon-arrow-right" aria-hidden="true"></span>
             </div>
           </button>
           <button
             v-if="false"
             @click="windowObj.open('https://status.tiouo.cc/status/default', '_blank')"
-            class="btn">
+            class="btn arrow-action">
             <span>Sites</span>
-            <div class="btn-icon">
+            <div class="arrow-action-icon">
               <span class="iconfont icon-arrow-right" aria-hidden="true"></span>
             </div>
           </button>
@@ -263,14 +263,13 @@ onUnmounted(() => {
     transform: translateY(0);
   }
 }
-.btn-icon {
+.btn .arrow-action-icon {
   margin-left: 10px;
   width: 18px;
   height: 18px;
   font-size: 18px;
   color: white;
   position: relative;
-  transition: all 0.3s ease !important;
   top: -1px;
 }
 .p-font {
@@ -314,9 +313,6 @@ onUnmounted(() => {
 }
 .btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
-}
-.btn:hover .btn-icon {
-  transform: translateX(5px);
 }
 .g-btn-icon {
   margin-left: 10px;

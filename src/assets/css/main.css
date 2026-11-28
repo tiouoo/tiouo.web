@@ -18,10 +18,19 @@ span {
   box-sizing: border-box;
   user-select: none;
   font-family: 'fff', sans-serif !important;
+  transition: all 0.3s ease !important;
 }
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+}
+.arrow-action-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.arrow-action:hover .arrow-action-icon,
+.arrow-action:focus-visible .arrow-action-icon {
+  transform: translateX(5px);
 }
 a:hover,
 a:link,
@@ -39,9 +48,9 @@ a {
   text-decoration: none !important;
 }
 body {
-  --grid-size: 40px;
+  --grid-size: 48px;
   --grid-line: 1px;
-  --grid-color: #272727;
+  --grid-color: #2727277a;
   background-color: black;
   background-image:
     linear-gradient(to right, var(--grid-color) var(--grid-line), transparent 0),
