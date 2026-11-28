@@ -23,7 +23,7 @@ const pwaConfig = {
     ],
   },
   workbox: {
-    navigateFallbackAllowlist: [/^\/$/],
+    navigateFallbackAllowlist: [/^\/(?:zh\/?)?(?:\?.*)?$/],
     globPatterns: ['**/*.{js,css,html,ico,svg,txt,xml,png}'],
     maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     runtimeCaching: [

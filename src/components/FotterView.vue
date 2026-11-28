@@ -20,7 +20,7 @@
       </div>
 
       <button @click="openModal('/img/t/qq.png')" class="touch-button">
-        Get in Touch
+        {{ copy.getInTouch }}
         <span class="iconfont icon-envelope" aria-hidden="true"></span>
       </button>
     </div>
@@ -44,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import { copy } from '@/locale';
 import { inject } from 'vue';
 
 interface SocialLink {
@@ -56,7 +57,7 @@ const openModal = inject<(imageUrl: string) => void>('openModal', () => {});
 
 const socialLinks: SocialLink[] = [
   {
-    name: 'Email',
+    name: copy.email,
     url: 'mailto:tiouo@qq.com',
     isExternal: false,
     icon: 'icon-gmail',
@@ -77,7 +78,6 @@ const socialLinks: SocialLink[] = [
 </script>
 
 <style scoped>
-/* 这里的变量请根据你项目的全局变量进行调整，或直接使用颜色值 */
 :root {
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.6);

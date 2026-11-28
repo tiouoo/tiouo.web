@@ -1,30 +1,33 @@
 <template>
   <div id="about" class="about-container">
     <div class="root">
-      <h2 ref="titleRef" class="about-title animate-up">ABOUT ME</h2>
+      <h2 ref="titleRef" class="about-title animate-up">{{ copy.aboutHeading }}</h2>
       <p class="title-text animate-up" ref="subtitleRef">
-        <strong> Student. 🍃</strong>
+        <strong>{{ copy.student }}</strong>
       </p>
       <div class="content-body animate-up" ref="contentRef">
-        <span>Currently navigating the exciting (and slightly chaotic) world of </span>
-        <span class="highlight">high school</span>.
+        <span>{{ copy.schoolIntro }}</span>
+        <span class="highlight">{{ copy.school }}</span
+        >{{ copy.schoolEnd }}
         <br />
-        I spend my days balancing
-        <a href="javascript:void(0)" class="link-tag">complex equations</a>
-        and the simple joy of a
-        <a href="javascript:void(0)" class="link-tag">golden sunset</a>.
-        <span> Just a curious soul trying to capture every vibrant moment of life.</span>
+        {{ copy.balance }}
+        <a href="javascript:void(0)" class="link-tag">{{ copy.equations }}</a>
+        {{ copy.joy }}
+        <a href="javascript:void(0)" class="link-tag">{{ copy.sunset }}</a
+        >{{ copy.sunsetEnd }}
+        <span>{{ copy.curiosity }}</span>
       </div>
       <img
         class="git-contribution-chart animate-up"
         ref="chartRef"
         src="https://ghchart.rshah.org/409ba5/tiouoo"
-        alt="GitHub contribution chart for tiouoo" />
+        :alt="copy.contributionChart" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { copy } from '@/locale';
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const titleRef = ref<HTMLElement | null>(null);
@@ -48,9 +51,11 @@ onMounted(() => {
     }
   );
 
-  [titleRef.value, subtitleRef.value, contentRef.value, chartRef.value].filter(Boolean).forEach((el) => {
-    observer.value?.observe(el!);
-  });
+  [titleRef.value, subtitleRef.value, contentRef.value, chartRef.value]
+    .filter(Boolean)
+    .forEach((el) => {
+      observer.value?.observe(el!);
+    });
 });
 
 onUnmounted(() => {

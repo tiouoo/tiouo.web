@@ -10,12 +10,12 @@
             height: `${scale * 42}px`,
           }"
           src="@/assets/static/avatar.png"
-          alt="avatar-title" />
+          :alt="copy.titleAvatar" />
         <span style="color: white; opacity: visibleOpacity">Tiouo</span>
       </div>
       <div class="right">
         <button class="g-btn" :disabled="!visibleOpacity" @click="openModal('/img/t/qq.png')">
-          <span style="position: relative; top: 1px">Contact</span>
+          <span style="position: relative; top: 1px">{{ copy.contact }}</span>
           <div class="g-btn-icon">
             <span class="iconfont icon-comment" aria-hidden="true"></span>
           </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import { copy } from '@/locale';
 import { computed, inject } from 'vue';
 
 const props = defineProps<{

@@ -2,31 +2,32 @@
 <template>
   <div class="about-container">
     <div class="root">
-      <h2 id="work" ref="titleRef" class="animate-up">MY WORK</h2>
+      <h2 id="work" ref="titleRef" class="animate-up">{{ copy.workHeading }}</h2>
       <p class="title-text animate-up" ref="subtitleRef">
-        <del>Senior Sleep Engineer 🛌.</del> A Full-stack Developer
+        <del>{{ copy.sleepEngineer }}</del
+        >{{ copy.developer }}
       </p>
       <div class="content-body animate-up" ref="contentRef">
-        I enjoy making
+        {{ copy.enjoy }}
         <a
           href="https://github.com/tiouoo"
           target="_blank"
           rel="noopener noreferrer"
           class="link-tag"
           title="GitHub">
-          useful and fun projects
+          {{ copy.projects }}
           <span class="icon-wrapper">
             <span class="iconfont icon-github" aria-hidden="true"></span>
           </span>
         </a>
-        <span> or just </span>
+        <span>{{ copy.orJust }}</span>
         <a
           href="https://status.tiouo.cc/status/default"
           target="_blank"
           rel="noopener noreferrer"
           class="link-tag"
-          title="status">
-          some bugs
+          :title="copy.status">
+          {{ copy.bugs }}
           <span class="icon-wrapper">
             <span class="iconfont icon-bug" aria-hidden="true"></span>
           </span>
@@ -36,9 +37,9 @@
       <div class="project-container">
         <article class="project-card project-card-wide animate-up" ref="websiteRef">
           <h3 class="project-title">tiouo.web</h3>
-          <p class="project-description">This website you are browsing.</p>
+          <p class="project-description">{{ copy.website }}</p>
 
-          <ul class="tags" aria-label="Technologies">
+          <ul class="tags" :aria-label="copy.technologies">
             <li class="p-tag" style="--tag-color: 65 184 131">Vue</li>
             <li class="p-tag" style="--tag-color: 0 191 255">TypeScript</li>
             <li class="p-tag" style="--tag-color: 230 127 166">Web</li>
@@ -50,7 +51,7 @@
               href="https://github.com/tiouoo/tiouo.web"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="tiouo.web on GitHub">
+              :aria-label="copy.websiteGitHub">
               <span class="iconfont icon-github" aria-hidden="true"></span>
               <span class="github-label">GitHub</span>
             </a>
@@ -59,13 +60,13 @@
         <article class="project-card animate-up" ref="ovouiRef">
           <h3 class="project-title">OvoUi.Avalonia</h3>
           <p class="project-description">
-            Modern Fluent Design components for Avalonia, built for a seamless user experience.
+            {{ copy.ovoui }}
           </p>
 
-          <ul class="tags" aria-label="Technologies">
+          <ul class="tags" :aria-label="copy.technologies">
             <li class="p-tag" style="--tag-color: 197 143 231">Avalonia</li>
             <li class="p-tag" style="--tag-color: 122 210 101">C#</li>
-            <li class="p-tag" style="--tag-color: 246 176 35">Library</li>
+            <li class="p-tag" style="--tag-color: 246 176 35">{{ copy.library }}</li>
           </ul>
 
           <div class="project-actions">
@@ -74,7 +75,7 @@
               href="https://github.com/tiouoo/OvoUi.Avalonia"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="OvoUi.Avalonia on GitHub">
+              :aria-label="copy.ovouiGitHub">
               <span class="iconfont icon-github" aria-hidden="true"></span>
               <span class="github-label">GitHub</span>
             </a>
@@ -83,7 +84,7 @@
               href="https://oui.chilo.top/"
               target="_blank"
               rel="noopener noreferrer">
-              Open Demo
+              {{ copy.demo }}
               <span class="arrow-action-icon">
                 <span class="iconfont icon-arrow-right" aria-hidden="true"></span>
               </span>
@@ -96,6 +97,7 @@
 </template>
 
 <script setup lang="ts">
+import { copy } from '@/locale';
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const titleRef = ref<HTMLElement | null>(null);
@@ -210,7 +212,7 @@ onUnmounted(() => {
 }
 
 .project-actions .project-demo {
-  padding: 7px 20px 5px;
+  padding: 7px 20px 6px;
   background: hsl(189 100% 50% / 10%);
   color: #00d9ff;
 }

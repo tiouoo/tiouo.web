@@ -14,11 +14,11 @@
 
   <div :class="{ show: showModal }" class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
-      <button class="modal-close" aria-label="Close" @click="closeModal">
+      <button class="modal-close" :aria-label="copy.close" @click="closeModal">
         <span class="iconfont icon-close" aria-hidden="true"></span>
       </button>
       <div class="modal-image">
-        <img :src="modalImage" style="z-index: 999" alt="Contact Image" />
+        <img :src="modalImage" style="z-index: 999" :alt="copy.contactImage" />
         <span class="loading-spinner" aria-hidden="true"></span>
         <span class="tip" style="color: #404040">QQ + 840673183</span>
       </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { copy } from '@/locale';
 import { ref, onMounted, onUnmounted, provide } from 'vue';
 import TitleBar from './TitleBar.vue';
 import FotterView from './FotterView.vue';

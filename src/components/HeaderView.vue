@@ -6,7 +6,7 @@
         ref="avatarContainer"
         :class="{ typing: isTypingClass }"
         class="avatar-container pixel-grid"></div> -->
-      <img class="avatar animated-avatar" src="@/assets/static/avatar.png" alt="avatar" />
+      <img class="avatar animated-avatar" src="@/assets/static/avatar.png" :alt="copy.avatar" />
 
       <div class="content-text">
         <p class="p-input animated-element" style="margin-bottom: 16px; animation-delay: 0.1s">
@@ -26,20 +26,20 @@
           style="margin-bottom: 24px; animation-delay: 0.3s"
           data-delay="0.6">
           <span style="color: #737a83">[ </span>
-          <span style="color: white">Full-stack Engineer</span>
+          <span style="color: white">{{ copy.engineer }}</span>
           <span style="color: #737a83"> | </span>
-          <span style="color: white">Designer</span>
+          <span style="color: white">{{ copy.designer }}</span>
           <span style="color: #737a83"> ]</span>
         </p>
         <p class="note animated-element" style="animation-delay: 0.4s">
-          "Forge ahead bravely against all uncertainties."
+          {{ copy.motto }}
         </p>
         <p
           class="p-eye animated-element"
           style="color: #585f68; font-size: 14px; animation-delay: 0.5s"
           data-delay="1.0">
           <span style="margin-right: 8px">//</span>
-          <span>Studying and wanting to make more friends 👀</span>
+          <span>{{ copy.study }}</span>
         </p>
         <div class="apps" style="animation-delay: 0.6s">
           <div
@@ -56,7 +56,7 @@
         </div>
         <div class="btns animated-element" style="animation-delay: 0.85s">
           <button class="btn arrow-action" @click="scrollToAbout">
-            <span>About</span>
+            <span>{{ copy.about }}</span>
             <div class="arrow-action-icon">
               <span class="iconfont icon-arrow-right" aria-hidden="true"></span>
             </div>
@@ -65,13 +65,13 @@
             v-if="false"
             @click="windowObj.open('https://status.tiouo.cc/status/default', '_blank')"
             class="btn arrow-action">
-            <span>Sites</span>
+            <span>{{ copy.sites }}</span>
             <div class="arrow-action-icon">
               <span class="iconfont icon-arrow-right" aria-hidden="true"></span>
             </div>
           </button>
           <button class="g-btn" @click="openModal('/img/t/qq.png')">
-            <span style="position: relative; top: 1px">Get in Touch</span>
+            <span style="position: relative; top: 1px">{{ copy.getInTouch }}</span>
             <div class="g-btn-icon">
               <span class="iconfont icon-comment" aria-hidden="true"></span>
             </div>
@@ -85,6 +85,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { copy } from '@/locale';
 import { ref, inject, onMounted, onUnmounted } from 'vue';
 import { avatarPixels } from '@/assets/avatar';
 
