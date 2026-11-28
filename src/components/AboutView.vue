@@ -123,12 +123,6 @@ onUnmounted(() => {
   vertical-align: middle;
 }
 
-.icon-wrapper :deep(svg) {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-}
-
 /* 入场动画 */
 .animate-up {
   opacity: 0;
