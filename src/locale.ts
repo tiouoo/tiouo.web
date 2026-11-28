@@ -1,4 +1,7 @@
-export const isChinese = /^\/zh\/?$/.test(window.location.pathname);
+import { computed } from 'vue';
+import { router } from './router';
+
+export const isChinese = computed(() => /^\/zh\/?$/.test(router.currentRoute.value.path));
 
 const messages = {
   avatar: ['avatar', '头像'],
@@ -49,8 +52,9 @@ const messages = {
   contactImage: ['Contact Image', 'QQ 联系二维码'],
 } as const;
 
-const languageIndex = isChinese ? 1 : 0;
-
-export const copy = Object.fromEntries(
-  Object.entries(messages).map(([key, translations]) => [key, translations[languageIndex]])
-) as Record<keyof typeof messages, string>;
+export const copy = computed(() => {
+  const languageIndex = isChinese.value ? 1 : 0;
+  return Object.fromEntries(
+    Object.entries(messages).map(([key, translations]) => [key, translations[languageIndex]])
+  ) as Record<keyof typeof messages, string>;
+});

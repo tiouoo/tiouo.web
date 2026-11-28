@@ -26,26 +26,29 @@
     </div>
 
     <div class="footer-bottom">
-      <h1 class="brand-text">
-        <span class="brand-name" id="foot-element">Tiouo</span>
+      <div class="footer-brand">
+        <h1 class="brand-text">
+          <span class="brand-name" id="foot-element">Tiouo</span>
+        </h1>
+        <RouterLink v-if="isChinese" class="language-link" to="/" hreflang="en" lang="en">
+          Switch to English
+        </RouterLink>
+        <RouterLink v-else class="language-link" to="/zh" hreflang="zh-CN" lang="zh-CN">
+          切换为中文
+        </RouterLink>
         <p class="copyright">
           (c) 2026-present
-          <a
-            style="text-decoration: underline !important"
-            target="_blank"
-            href="https://github.com/tiouoo"
-            >tiouo</a
-          >
+          <a target="_blank" href="https://github.com/tiouoo">tiouo</a>
           Crafted with passion and code.
         </p>
-      </h1>
+      </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-import { copy } from '@/locale';
-import { inject } from 'vue';
+import { copy, isChinese } from '@/locale';
+import { computed, inject } from 'vue';
 
 interface SocialLink {
   name: string;
@@ -55,9 +58,9 @@ interface SocialLink {
 }
 const openModal = inject<(imageUrl: string) => void>('openModal', () => {});
 
-const socialLinks: SocialLink[] = [
+const socialLinks = computed<SocialLink[]>(() => [
   {
-    name: copy.email,
+    name: copy.value.email,
     url: 'mailto:tiouo@qq.com',
     isExternal: false,
     icon: 'icon-gmail',
@@ -74,7 +77,7 @@ const socialLinks: SocialLink[] = [
     isExternal: true,
     icon: 'icon-bilibili-footer',
   },
-];
+]);
 </script>
 
 <style scoped>
@@ -206,8 +209,29 @@ const socialLinks: SocialLink[] = [
   line-height: 1;
 }
 
-.copyright {
+.footer-brand {
+  min-width: 0;
+  text-align: left;
+}
+
+.footer-bottom .language-link {
+  display: inline-block;
   margin-top: 4rem;
+  color: rgb(255 255 255 / 65%);
+  font-size: 0.8rem;
+}
+
+.footer-brand a {
+  text-decoration: underline !important;
+}
+
+.footer-brand a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.copyright {
+  margin-top: 0.65rem;
   font-size: 1rem; /* font-size-md */
   letter-spacing: normal;
   font-weight: 400;

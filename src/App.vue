@@ -1,11 +1,14 @@
 <template>
   <div class="root">
-    <MainView />
+    <LanguagePrompt v-if="showLanguagePrompt" />
+    <RouterView />
   </div>
 </template>
 
 <script setup lang="ts">
-import MainView from './MainView.vue';
+import LanguagePrompt from './components/LanguagePrompt.vue';
+
+const showLanguagePrompt = /^zh(?:-|$)/i.test(navigator.language);
 </script>
 <style scoped>
 .root {
