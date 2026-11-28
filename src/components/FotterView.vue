@@ -30,12 +30,6 @@
         <h1 class="brand-text">
           <span class="brand-name" id="foot-element">Tiouo</span>
         </h1>
-        <RouterLink v-if="isChinese" class="language-link" to="/" hreflang="en" lang="en">
-          Switch to English
-        </RouterLink>
-        <RouterLink v-else class="language-link" to="/zh" hreflang="zh-CN" lang="zh-CN">
-          切换为中文
-        </RouterLink>
         <p class="copyright">
           (c) 2026-present
           <a target="_blank" href="https://github.com/tiouoo">tiouo</a>
@@ -47,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { copy, isChinese } from '@/locale';
+import { copy } from '@/locale';
 import { computed, inject } from 'vue';
 
 interface SocialLink {
@@ -214,13 +208,6 @@ const socialLinks = computed<SocialLink[]>(() => [
   text-align: left;
 }
 
-.footer-bottom .language-link {
-  display: inline-block;
-  margin-top: 4rem;
-  color: rgb(255 255 255 / 65%);
-  font-size: 0.8rem;
-}
-
 .footer-brand a {
   text-decoration: underline !important;
 }
@@ -231,7 +218,7 @@ const socialLinks = computed<SocialLink[]>(() => [
 }
 
 .copyright {
-  margin-top: 0.65rem;
+  margin-top: 4rem;
   font-size: 1rem; /* font-size-md */
   letter-spacing: normal;
   font-weight: 400;
