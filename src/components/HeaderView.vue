@@ -62,8 +62,7 @@
             </div>
           </button>
           <button
-            v-if="false"
-            @click="windowObj.open('https://status.chilo.top/status/default', '_blank')"
+            @click="windowObj.open('https://status.chilo.top/status/default', '_blank', 'noopener,noreferrer')"
             class="btn arrow-action">
             <span>{{ copy.sites }}</span>
             <div class="arrow-action-icon">
