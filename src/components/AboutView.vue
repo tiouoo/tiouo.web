@@ -1,7 +1,7 @@
 <template>
-  <div class="about-container">
+  <div id="about" class="about-container">
     <div class="root">
-      <h2 id="about" ref="titleRef" class="animate-up">ABOUT ME</h2>
+      <h2 ref="titleRef" class="about-title animate-up">ABOUT ME</h2>
       <p class="title-text animate-up" ref="subtitleRef">
         <strong> Student. 🍃</strong>
       </p>
@@ -62,7 +62,11 @@ onUnmounted(() => {
 .link-tag {
   margin-top: 5px;
 }
-#about {
+.about-container {
+  scroll-margin-top: 24px;
+}
+
+.about-title {
   margin-bottom: 32px;
   font-size: 36px;
 }
